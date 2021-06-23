@@ -1,0 +1,35 @@
+D:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v {2 {vlog -work work_e1 -stats=none D:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+** Warning: D:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v(5): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: D:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v(22): (vlog-2284) Empty $unit scope found.
+-- Compiling package d_ff_v_unit
+-- Compiling module d_ff
+
+Top level modules:
+	d_ff
+
+} {} {}} D:/Projects/HW2-Exercise/Exercise_1/src/d_ff_TB.v {1 {vlog -work work_e1 -stats=none D:/Projects/HW2-Exercise/Exercise_1/src/d_ff_TB.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module d_ff_TB
+
+Top level modules:
+	d_ff_TB
+
+} {} {}} D:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v {1 {vlog -work work_e1 -stats=none D:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module bFSM
+
+Top level modules:
+	bFSM
+
+} {} {}} D:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v {2 {vlog -work work_e1 -stats=none D:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+** Warning: D:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v(1): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: D:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v(51): (vlog-2284) Empty $unit scope found.
+-- Compiling package dFSM_v_unit
+-- Compiling module dFSM
+
+Top level modules:
+	dFSM
+
+} {} {}}

@@ -1,0 +1,15 @@
+D:/Projects/HW2-Exercise/Exercise_1/src/bFSM_vector_TB.v {1 {vlog -work work -stats=none D:/Projects/HW2-Exercise/Exercise_1/src/bFSM_vector_TB.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module bFSM_vector_TB
+
+Top level modules:
+	bFSM_vector_TB
+
+} {} {}} D:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v {1 {vlog -work work -stats=none D:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module bFSM
+
+Top level modules:
+	bFSM
+
+} {} {}}

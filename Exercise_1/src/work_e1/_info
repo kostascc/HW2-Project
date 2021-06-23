@@ -1,0 +1,323 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/Projects/HW2-Exercise/Exercise_2/src
+vbFSM
+Z0 !s110 1624442126
+!i10b 1
+!s100 _<RWL=a=2_J5^<2@nXm[J1
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I3=X8D<Ane4^>H]JmC8EDI0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 dD:/Projects/HW2-Exercise/Exercise_1/src
+w1624307335
+8D:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v
+FD:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v
+!i122 1388
+L0 1 45
+Z4 OV;L;2020.1;71
+r1
+!s85 0
+31
+!s108 1624442125.000000
+!s107 D:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v|
+!s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/bFSM.v|
+!i113 1
+Z5 o-work work_e1
+Z6 tCvgOpt 0
+nb@f@s@m
+vbFSM_TB
+!s110 1624305668
+!i10b 1
+!s100 mCU`F0agc7c0=0O4G2C553
+R1
+IFH?CKORJh<Cj^1]dlbD581
+R2
+R3
+w1624305416
+Z7 8D:/Projects/HW2-Exercise/Exercise_1/src/bFSM_vector_TB.v
+Z8 FD:/Projects/HW2-Exercise/Exercise_1/src/bFSM_vector_TB.v
+!i122 418
+Z9 L0 3 41
+R4
+r1
+!s85 0
+31
+!s108 1624305668.000000
+Z10 !s107 D:/Projects/HW2-Exercise/Exercise_1/src/bFSM_vector_TB.v|
+Z11 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/bFSM_vector_TB.v|
+!i113 1
+R5
+R6
+nb@f@s@m_@t@b
+vbFSM_vector_TB
+!s110 1624305269
+!i10b 1
+!s100 ZadQH[lhJ3do7JFP`5P^k3
+R1
+ISmhJ>X:ETjPjh72o_aVfj3
+R2
+R3
+w1624301768
+R7
+R8
+!i122 402
+R9
+R4
+r1
+!s85 0
+31
+!s108 1624305269.000000
+R10
+R11
+!i113 1
+R5
+R6
+nb@f@s@m_vector_@t@b
+vd_ff
+R0
+R2
+r1
+!s85 0
+!i10b 1
+!s100 eZ2S?dEnb;mjEn9FJ>5Id0
+IXnl>S>[N[@BeS907oWF]O2
+R3
+Z12 w1624397751
+Z13 8D:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v
+Z14 FD:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v
+!i122 1389
+L0 6 17
+R4
+31
+Z15 !s108 1624442126.000000
+Z16 !s107 D:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v|
+Z17 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/d_ff.v|
+!i113 1
+R5
+R6
+vd_ff_TB
+R0
+!i10b 1
+!s100 ^?@OZnoXifc:Y;D7NM3TB0
+R1
+Im36<RVQYz^ke27]IJNCzD3
+R2
+R3
+w1624304061
+Z18 8D:/Projects/HW2-Exercise/Exercise_1/src/d_ff_TB.v
+Z19 FD:/Projects/HW2-Exercise/Exercise_1/src/d_ff_TB.v
+!i122 1390
+L0 2 42
+R4
+r1
+!s85 0
+31
+R15
+Z20 !s107 D:/Projects/HW2-Exercise/Exercise_1/src/d_ff_TB.v|
+Z21 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/d_ff_TB.v|
+!i113 1
+R5
+R6
+nd_ff_@t@b
+Xd_ff_v_unit
+Z22 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+R0
+V]X1BXKRL_NGTOWOGKY2I02
+r1
+!s85 0
+!i10b 1
+!s100 zGmEcab6FGD`MN742d0g83
+I]X1BXKRL_NGTOWOGKY2I02
+!i103 1
+S1
+R3
+R12
+R13
+R14
+!i122 1389
+L0 5 0
+R4
+31
+R15
+R16
+R17
+!i113 1
+R5
+R6
+vdff_test
+!s110 1624290803
+!i10b 1
+!s100 7P_WRWFmUj@YYE^j8SHSo0
+R1
+I71`8k<EH568TbQhEMihS`3
+R2
+R3
+w1624290800
+R18
+R19
+!i122 31
+L0 4 23
+R4
+r1
+!s85 0
+31
+!s108 1624290803.000000
+R20
+R21
+!i113 1
+R5
+R6
+vdFSM
+Z23 !s110 1624442127
+R2
+r1
+!s85 0
+!i10b 1
+!s100 4h5Q`O1AFE>MlNI9nQ<E61
+IF7bEAeCSe5ZKKU2HeeJh:3
+R3
+Z24 w1624399839
+Z25 8D:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v
+Z26 FD:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v
+!i122 1391
+L0 2 50
+R4
+31
+Z27 !s108 1624442127.000000
+Z28 !s107 D:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v|
+Z29 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/dFSM.v|
+!i113 1
+R5
+R6
+nd@f@s@m
+vdFSM_TB
+R23
+!i10b 1
+!s100 kP7DaK;_nAOICB^?Ra9LT1
+R1
+IH<6GV6BdHHc[RdS1ic_923
+R2
+R3
+w1624442123
+8D:/Projects/HW2-Exercise/Exercise_1/src/dFSM_TB.v
+FD:/Projects/HW2-Exercise/Exercise_1/src/dFSM_TB.v
+!i122 1392
+L0 3 49
+R4
+r1
+!s85 0
+31
+R27
+!s107 D:/Projects/HW2-Exercise/Exercise_1/src/dFSM_TB.v|
+!s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/dFSM_TB.v|
+!i113 1
+R5
+R6
+nd@f@s@m_@t@b
+XdFSM_v_unit
+R22
+R23
+VcSTo:Zo=IiFSN;0Ode[hF3
+r1
+!s85 0
+!i10b 1
+!s100 _M7T9Jjoa>1TfOzk]=BVC3
+IcSTo:Zo=IiFSN;0Ode[hF3
+!i103 1
+S1
+R3
+R24
+R25
+R26
+!i122 1391
+Z30 L0 1 0
+R4
+31
+R27
+R28
+R29
+!i113 1
+R5
+R6
+nd@f@s@m_v_unit
+vdStateManager
+Z31 !s110 1624392673
+R2
+r1
+!s85 0
+!i10b 1
+!s100 5RI`DUgB@J0JC1k8DT3?41
+I=R81=l:Fdeen^:Yl`?:=b1
+R3
+Z32 w1624392328
+Z33 8D:/Projects/HW2-Exercise/Exercise_1/src/dStateManager.v
+Z34 FD:/Projects/HW2-Exercise/Exercise_1/src/dStateManager.v
+!i122 1341
+L0 2 97
+R4
+31
+Z35 !s108 1624392673.000000
+Z36 !s107 D:/Projects/HW2-Exercise/Exercise_1/src/dStateManager.v|
+Z37 !s90 -reportprogress|300|-work|work|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/dStateManager.v|
+!i113 1
+Z38 o-work work
+R6
+nd@state@manager
+vdStateManager_TB
+R31
+!i10b 1
+!s100 ]>P5UHP^Zj^Ej=0GQ5f?]3
+R1
+Iaiel[^?`k9PmbgAjmHZgZ2
+R2
+R3
+w1624387111
+8D:/Projects/HW2-Exercise/Exercise_1/src/dStateManager_TB.v
+FD:/Projects/HW2-Exercise/Exercise_1/src/dStateManager_TB.v
+!i122 1342
+L0 2 61
+R4
+r1
+!s85 0
+31
+R35
+!s107 D:/Projects/HW2-Exercise/Exercise_1/src/dStateManager_TB.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Projects/HW2-Exercise/Exercise_1/src/dStateManager_TB.v|
+!i113 1
+R38
+R6
+nd@state@manager_@t@b
+XdStateManager_v_unit
+R22
+R31
+VZ^g>lfa9eVac@amY@CTzU3
+r1
+!s85 0
+!i10b 1
+!s100 l<BHKF_MTlAI2dmfico103
+IZ^g>lfa9eVac@amY@CTzU3
+!i103 1
+S1
+R3
+R32
+R33
+R34
+!i122 1341
+R30
+R4
+31
+R35
+R36
+R37
+!i113 1
+R38
+R6
+nd@state@manager_v_unit
