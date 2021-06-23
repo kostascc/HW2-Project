@@ -17,7 +17,7 @@ initial
     begin
         $readmemb("bFSM_TBVector",testVector);
         i=0;
-        reset=1; in=0;
+        reset=0; in=0;
     end
 
 always@(posedge clk)
