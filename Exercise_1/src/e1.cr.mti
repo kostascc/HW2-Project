@@ -1,9 +1,12 @@
-D:/Projects/HW2-Project/Exercise_1/src/d_ff_TB.v {1 {vlog -work work_e1 -stats=none D:/Projects/HW2-Project/Exercise_1/src/d_ff_TB.v
+D:/Projects/HW2-Project/Exercise_1/src/jk_ff.v {2 {vlog -work work_e1 -stats=none D:/Projects/HW2-Project/Exercise_1/src/jk_ff.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module d_ff_TB
+** Warning: D:/Projects/HW2-Project/Exercise_1/src/jk_ff.v(1): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: D:/Projects/HW2-Project/Exercise_1/src/jk_ff.v(20): (vlog-2284) Empty $unit scope found.
+-- Compiling package jk_ff_v_unit
+-- Compiling module jk_ff
 
 Top level modules:
-	d_ff_TB
+	jk_ff
 
 } {} {}} D:/Projects/HW2-Project/Exercise_1/src/bFSM.v {1 {vlog -work work_e1 -stats=none D:/Projects/HW2-Project/Exercise_1/src/bFSM.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -12,12 +15,29 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	bFSM
 
+} {} {}} D:/Projects/HW2-Project/Exercise_1/src/jk_ff_TB.v {1 {vlog -work work_e1 -stats=none D:/Projects/HW2-Project/Exercise_1/src/jk_ff_TB.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module jk_ff_TB
+
+Top level modules:
+	jk_ff_TB
+
 } {} {}} D:/Projects/HW2-Project/Exercise_1/src/bFSM_TB.v {1 {vlog -work work_e1 -stats=none D:/Projects/HW2-Project/Exercise_1/src/bFSM_TB.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module bFSM_TB
 
 Top level modules:
 	bFSM_TB
+
+} {} {}} D:/Projects/HW2-Project/Exercise_1/src/dFSM.v {2 {vlog -work work_e1 -stats=none D:/Projects/HW2-Project/Exercise_1/src/dFSM.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+** Warning: D:/Projects/HW2-Project/Exercise_1/src/dFSM.v(1): (vlog-2283) Extra semicolon in $unit (global) scope.
+** Warning: D:/Projects/HW2-Project/Exercise_1/src/dFSM.v(55): (vlog-2284) Empty $unit scope found.
+-- Compiling package dFSM_v_unit
+-- Compiling module dFSM
+
+Top level modules:
+	dFSM
 
 } {} {}} D:/Projects/HW2-Project/Exercise_1/src/dFSM_TB.v {1 {vlog -work work_e1 -stats=none D:/Projects/HW2-Project/Exercise_1/src/dFSM_TB.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
