@@ -10,7 +10,7 @@ z2
 cModel Technology
 dD:/Programs/intelFPGA/20.1/Projects
 vbFSM
-Z0 !s110 1624454181
+Z0 !s110 1624463328
 !i10b 1
 !s100 _<RWL=a=2_J5^<2@nXm[J1
 Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -20,13 +20,13 @@ Z3 dD:/Projects/HW2-Project/Exercise_1/src
 w1624307335
 8D:/Projects/HW2-Project/Exercise_1/src/bFSM.v
 FD:/Projects/HW2-Project/Exercise_1/src/bFSM.v
-!i122 188
+!i122 252
 L0 1 45
 Z4 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z5 !s108 1624454181.000000
+Z5 !s108 1624463328.000000
 !s107 D:/Projects/HW2-Project/Exercise_1/src/bFSM.v|
 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Project/Exercise_1/src/bFSM.v|
 !i113 1
@@ -44,7 +44,7 @@ R3
 w1624444371
 8D:/Projects/HW2-Project/Exercise_1/src/bFSM_TB.v
 FD:/Projects/HW2-Project/Exercise_1/src/bFSM_TB.v
-!i122 189
+!i122 253
 L0 3 41
 R4
 r1
@@ -69,7 +69,7 @@ R3
 Z8 w1624397751
 Z9 8D:/Projects/HW2-Project/Exercise_1/src/d_ff.v
 Z10 FD:/Projects/HW2-Project/Exercise_1/src/d_ff.v
-!i122 190
+!i122 254
 L0 6 17
 R4
 31
@@ -80,23 +80,23 @@ Z12 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Project/E
 R6
 R7
 vd_ff_TB
-Z13 !s110 1624454182
+Z13 !s110 1624463329
 !i10b 1
-!s100 ^?@OZnoXifc:Y;D7NM3TB0
+!s100 N30PP?7IANjTOd7LG_fN63
 R1
-IZ=MMS6;5?=1F_z1_]a`Ba0
+I2]1ozcJjb7SOJJL>Mih7o0
 R2
 R3
-w1624304061
+w1624463325
 8D:/Projects/HW2-Project/Exercise_1/src/d_ff_TB.v
 FD:/Projects/HW2-Project/Exercise_1/src/d_ff_TB.v
-!i122 191
-L0 2 42
+!i122 255
+L0 2 41
 R4
 r1
 !s85 0
 31
-Z14 !s108 1624454182.000000
+Z14 !s108 1624463329.000000
 !s107 D:/Projects/HW2-Project/Exercise_1/src/d_ff_TB.v|
 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Project/Exercise_1/src/d_ff_TB.v|
 !i113 1
@@ -118,7 +118,7 @@ R3
 R8
 R9
 R10
-!i122 190
+!i122 254
 L0 5 0
 R4
 31
@@ -134,13 +134,13 @@ R2
 r1
 !s85 0
 !i10b 1
-!s100 zA9_6TQY`RJYXmZV;Gg`[2
-IgKYLSNUQ>zElB3YgdP=HJ3
+!s100 MPYV_1>QG^@dCgPBLOBhz1
+IF<50dVRekCchR299=jiLg0
 R3
-Z16 w1624454179
+Z16 w1624454962
 Z17 8D:/Projects/HW2-Project/Exercise_1/src/dFSM.v
 Z18 FD:/Projects/HW2-Project/Exercise_1/src/dFSM.v
-!i122 192
+!i122 256
 L0 2 54
 R4
 31
@@ -154,15 +154,15 @@ nd@f@s@m
 vdFSM_TB
 R13
 !i10b 1
-!s100 k;6BGcO5[i3lkJ@mLQE1D0
+!s100 5zN7mN@6ELC0lh_mCn]VD2
 R1
-I>:>STX<46lVWm4SfgSoQU3
+IX@I5=z^U3obFBP>QXmSjo1
 R2
 R3
-w1624454078
+w1624454367
 8D:/Projects/HW2-Project/Exercise_1/src/dFSM_TB.v
 FD:/Projects/HW2-Project/Exercise_1/src/dFSM_TB.v
-!i122 193
+!i122 257
 L0 3 53
 R4
 r1
@@ -190,8 +190,8 @@ R3
 R16
 R17
 R18
-!i122 192
-L0 1 0
+!i122 256
+Z21 L0 1 0
 R4
 31
 R14
@@ -201,3 +201,74 @@ R20
 R6
 R7
 nd@f@s@m_v_unit
+vjk_ff
+R13
+R2
+r1
+!s85 0
+!i10b 1
+!s100 <L@5EO2=F[CI5IfVd]?:C2
+IelK_`gNaAG747Z;zG=bi^2
+R3
+Z22 w1624460327
+Z23 8D:/Projects/HW2-Project/Exercise_1/src/jk_ff.v
+Z24 FD:/Projects/HW2-Project/Exercise_1/src/jk_ff.v
+!i122 258
+L0 2 19
+R4
+31
+R14
+Z25 !s107 D:/Projects/HW2-Project/Exercise_1/src/jk_ff.v|
+Z26 !s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Project/Exercise_1/src/jk_ff.v|
+!i113 1
+R6
+R7
+vjk_ff_TB
+R13
+!i10b 1
+!s100 oV3EhK:J@H9cl1QMKmlE[2
+R1
+I5XRk@j=d4_eD>l8<f>K8T1
+R2
+R3
+w1624460482
+8D:/Projects/HW2-Project/Exercise_1/src/jk_ff_TB.v
+FD:/Projects/HW2-Project/Exercise_1/src/jk_ff_TB.v
+!i122 259
+L0 2 44
+R4
+r1
+!s85 0
+31
+R14
+!s107 D:/Projects/HW2-Project/Exercise_1/src/jk_ff_TB.v|
+!s90 -reportprogress|300|-work|work_e1|-stats=none|D:/Projects/HW2-Project/Exercise_1/src/jk_ff_TB.v|
+!i113 1
+R6
+R7
+njk_ff_@t@b
+Xjk_ff_v_unit
+R15
+R13
+V@b20^D?RWz9LNQ<YZKf@:1
+r1
+!s85 0
+!i10b 1
+!s100 4NOFf]A1fhVc^`>QUL??T0
+I@b20^D?RWz9LNQ<YZKf@:1
+!i103 1
+S1
+R3
+R22
+R23
+R24
+!i122 258
+R21
+R4
+31
+R14
+R25
+R26
+!i113 1
+R6
+R7

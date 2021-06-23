@@ -45,11 +45,11 @@ module dFSM (
     // Handle Async Reset
     always @(posedge RST) begin
         D = rstState;
-        ENA = #1 1;
+        ENA = 1;
     end
 
     always @(posedge ENA) begin
-        ENA = #1 0;
+        ENA = #2 0;
     end
 
 endmodule

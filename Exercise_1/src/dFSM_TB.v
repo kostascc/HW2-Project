@@ -1,4 +1,4 @@
-`timescale 1ns/100ps
+`timescale 100ps/10ps
 
 module dFSM_TB;
 
@@ -26,14 +26,14 @@ initial
 
 always@(negedge clk)
     begin
-        #4
+        #49
         {reset,in,expectedOut}=testVector[i];
         // $display(reset,in,expectedOut);
     end
 
 always@(negedge clk)
     begin
-        #3
+        #48
         if(expectedOut !== out) begin
             $display("Wrong output at %d for inputs %b, %b!=%b",i,{reset,in},expectedOut,out);
         end
@@ -48,8 +48,8 @@ always@(negedge clk)
 
 always
     begin
-        clk <=1; #5;
-        clk <=0; #5;
+        clk <=1; #50;
+        clk <=0; #50;
     end
 
 endmodule
