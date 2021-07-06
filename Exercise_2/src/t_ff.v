@@ -1,25 +1,33 @@
 /**
- * INIT: Initialization Port (Active-LOW)
-**/
-module t_ff( Q, Qbar, T, CLK, INIT);
+ * Master-Slave T-FF
+ * negative edge triggered.
+ * 
+ * source: // TODO: find source
+ */
+module tff ( output wire q, qbar,
+             input wire t, clk, clr );
 
-    output Q, Qbar;
-    input T, CLK, INIT;
-    supply0 GND;
-    supply1 VDD;
+wire w1, w2, w3, w4, w5, w6, d;
 
-    // JK Latch in Master-Slave formation
-    not u3 (nCLKbar, CLK);
+// TODO: Change to positive edge triggered 
 
-    bufif1 (nJ, T, INIT);
-    bufif1 (nK, T, INIT);
+not g1(_clk, clk);
+not g2(_clr, clr);
+not g3(_d, d);
 
-    bufif0 (nJ, GND, INIT);
-    bufif0 (nK, VDD, INIT);
+xor ux (d, t, q);
 
-    jk_latch u1 (.Q(nu1), .Qbar(nu2), .CLK(CLK), .J(nJ), .K(nK), .s1(Qbar), .s2(Q));
+//master latch
+nand g4(w1, d, _clr, clk);
+nand g5(w2, clk, _d);
+nand g6(w3, w1, w4);
+nand g7(w4, w3, _clr, w2);
 
-    jk_latch u2 (.Q(Q), .Qbar(Qbar), .CLK(nCLKbar), .J(nu1), .K(nu2), .s1(nCLKbar), .s2(nCLKbar));
+//slave latch
+nand g8(w5, w3, _clr, _clk);
+nand g9(w6, _clk, w4);
+nand g10(q, w5, qbar);
+nand g11(qbar, q, _clr, w6);
 
 
-endmodule
+endmodule //dff
