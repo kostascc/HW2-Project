@@ -1,6 +1,7 @@
 `timescale 1ns/100ps
 module t_ff_TB;
 
+    // TODO: convert TB to use the new T-FF (if needed)
     reg T, CLK, INIT;
 
     wire Q, Qbar;
