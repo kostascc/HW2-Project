@@ -1,6 +1,6 @@
 `timescale 10ns/1ns;
 
-module BDCto7Seg_TB;
+module BCDto7Seg_TB;
 
     wire[6:0] LED;
     reg[3:0] ABCD;
