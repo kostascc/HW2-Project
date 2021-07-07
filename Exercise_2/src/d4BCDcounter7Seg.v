@@ -22,6 +22,8 @@ module d4BCDcounter7Seg(
 
     wire[3:0] ABCD[3:0];
 
+    // TODO: Add Clock Gating
+
     d4BCDcounter u_cnt (
         .ABCD({ABCD}),
         .EN(EN),

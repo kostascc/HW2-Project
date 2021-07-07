@@ -12,6 +12,4 @@ module d4BCDcounter(
         .RST   ( RST )
     );
 
-    // TODO: Create TB
-
 endmodule
