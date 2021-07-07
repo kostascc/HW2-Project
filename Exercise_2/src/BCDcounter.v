@@ -20,32 +20,35 @@
  */
 module BCDcounter(
     output wire[3:0] ABCD, 
-    output CARRY,
+    output wire CARRY,
     input EN, RST
 );
-
+    
     supply1 vdd;
 
     wire A, B, C, D;
-    assign {A,B,C,D} = {ABCD[3:0]};
+    assign {ABCD[3:0]} = {D,C,B,A};
+
+    wire An, Bn, Cn, Dn;
+
+    assign CARRY = Dn;
 
     // AND gates
-    and u_a1 (n_a1, D, An  ),
-        u_a2 (n_a2, C, D   ),
+    and u_a1 (n_a1, A, Dn  ),
+        u_a2 (n_a2, B, A   ),
         u_a3 (n_a3, D, A   ),
-        u_a4 (n_a4, B, n_a2);
+        u_a4 (n_a4, C, n_a2);
 
     // OR gate
-    or  u_o5 (n_a5, n_a3, n_a4);
+    or  u_o5 (n_o5, n_a3, n_a4);
 
     // T-FFs
     t_ff u_t[3:0] (
-        .T ({vdd, n_a1, n_a2, n_a5}),
-        .Q ({ D,  C,  B,  A}),
-        .Qn({Dn, Cn, Bn, An}),
+        .T ({vdd, n_a1, n_a2, n_o5}),
+        .Q ({A , B , C , D }),
+        .Qn({An, Bn, Cn, Dn}),
         .RST(RST),
         .CLK(EN)
     );
 
-    // TODO: Create TB
 endmodule
