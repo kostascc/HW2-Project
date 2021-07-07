@@ -9,16 +9,22 @@
  * This module converts a BCD 4-bit
  * number, to a 7 Segment LED. 
  * 
- * A, B, C, D   :   4-bit BCD Signal
- * a, b..., g   :   7 Segment Signal
+ * ABCD         :   4-bit BCD Signal
+ * LED          :   7 Segment Signal
  * LED_type_ctl :   LOW  = Common Cathode
  *                  HIGH = Common Anode
  */
 module BCDto7Seg (
-    output a, b, c, d, e, f, g, // 7 Seg.
-    input A, B, C, D,           // BCD
-    input LED_type_ctl,         // LED type
+    output[6:0] LED,    // 7 Seg.
+    input[3:0] ABCD,    // BCD
+    input LED_type_ctl, // LED type
 );
+
+    wire[3:0] ABCD;
+    wire[6:0] LED;
+
+    assign {A,B,C,D}        = {ABCD[3:0]};
+    assign {a,b,c,d,e,f,g}  = { LED[6:0]};
 
     // Inverters
     not u_An (_A, A),
