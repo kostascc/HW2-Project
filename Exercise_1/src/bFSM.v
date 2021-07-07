@@ -38,7 +38,7 @@ module bFSM(
     always @(currentState or X)
     begin: OUTPUT_LOGIC
 
-        Y = (X) & (1 - currentState[2]);
+        Y = (X) & (~currentState[2]);
 
     end
 

@@ -1,43 +1,69 @@
-`timescale 1ns/100ps
+`timescale 10ns/1ns
 
 module bFSM_TB;
 
-    reg clk;
-    reg reset;
-    reg in;
+    reg CLK;
+    reg RST;
+    reg X;
 
-    wire out;
-    reg expectedOut;
-    reg [31:0] i;
+    wire Y;
+    reg expectedY;
+    integer i;
 
-    bFSM dut(.CLK(clk), .RST(reset), .X(in), .Y(out));
+    bFSM dut(.CLK(CLK), .RST(RST), .X(X), .Y(Y));
     reg [2:0] testVector[17:0];
 
-initial
-    begin
+    initial begin
         $readmemb("bFSM_TBVector",testVector);
-        i=0;
-        reset=0; in=0;
+        CLK = 0;
+        i = 0;
+        RST = 1; 
+        X = 0;
     end
 
-always@(posedge clk)
-    begin
-        {reset,in,expectedOut}=testVector[i];#10;
-        $display(reset,in,expectedOut);
-    end
-
-always@(negedge clk)
-    begin
-        if(expectedOut !== out) begin
-            $display("Wrong output for inputs %b, %b!=%b",{reset,in},expectedOut,out);
+    always@(posedge CLK) begin
+        if (i <= 18) begin
+            {RST,X,expectedY} = testVector[i];
         end
-        i=i+1;
     end
 
-always
+    always@(negedge CLK)
     begin
-        clk <=1; #5;
-        clk <=0; #5;
+        if(i <= 18) begin
+            if(expectedY !== Y) begin
+                $display("Wrong input for outputs %b, %b!=%b",{RST,X},expectedY,Y);
+            end
+            if(i <= 18) begin
+                i = i+1;
+            end
+        end
+    end
+
+    initial begin
+        #165;   // Wait for the pre-determined vectors to end
+        i = 100;// Stop assigning pre-determined values
+
+        #3;
+        RST <= 1;
+        X <= 0;
+        expectedY <= 0;
+
+        #5;
+        RST <= 0;
+        expectedY <= 0;
+
+        #10;
+        X <= 1;
+        expectedY <= 1;
+
+        #2;
+        X <= 0;
+        expectedY <= 0;
+
+    end
+
+    always begin
+        #5 CLK <= ~CLK;
     end
 
 endmodule
