@@ -1,33 +1,46 @@
 /**
+ * Author:
+ *   Shubham Pandey
+ *   June 2021
+ *   kachatzis <at> ece.auth.gr
+ */
+
+/**
  * Master-Slave T-FF
  * negative edge triggered.
  * 
- * source: // TODO: find source
+ * source: github.com/spdy1895
  */
-module tff ( output wire q, qbar,
-             input wire t, clk, clr );
+module tff ( 
+    output wire Q, Qn,
+    input wire T, CLK, RST 
+);
 
 wire w1, w2, w3, w4, w5, w6, d;
 
 // TODO: Change to positive edge triggered 
 
-not g1(_clk, clk);
-not g2(_clr, clr);
-not g3(_d, d);
+wire _CLK;
+assign clk = _CLK;
 
-xor ux (d, t, q);
+not u0(_CLK, CLK);
+not u1(_clk, clk);
+not u2(_clr, RST);
+not u3(_d, d);
 
-//master latch
-nand g4(w1, d, _clr, clk);
-nand g5(w2, clk, _d);
-nand g6(w3, w1, w4);
-nand g7(w4, w3, _clr, w2);
+xor ux(d, T, Q);
 
-//slave latch
-nand g8(w5, w3, _clr, _clk);
-nand g9(w6, _clk, w4);
-nand g10(q, w5, qbar);
-nand g11(qbar, q, _clr, w6);
+// Master
+nand u4(w1, d, _clr, clk);
+nand u5(w2, clk, _d);
+nand u6(w3, w1, w4);
+nand u7(w4, w3, _clr, w2);
+
+// Slave
+nand u8(w5, w3, _clr, _clk);
+nand u9(w6, _clk, w4);
+nand u10(Q, w5, Qn);
+nand u11(Qn, Q, _clr, w6);
 
 
 endmodule //dff

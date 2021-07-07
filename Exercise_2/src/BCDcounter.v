@@ -22,7 +22,7 @@ module BCDcounter(
     output wire[3:0] ABCD, 
     output CARRY,
     input EN, RST
-)
+);
 
     supply1 vdd;
 
@@ -39,8 +39,8 @@ module BCDcounter(
     or  u_o5 (n_a5, n_a3, n_a4);
 
     // T-FFs
-    t_ff[3:0] u_t (
-        .T({vdd, n_a1, n_a2, n_a5}),
+    t_ff u_t[3:0] (
+        .T ({vdd, n_a1, n_a2, n_a5}),
         .Q ({ D,  C,  B,  A}),
         .Qn({Dn, Cn, Bn, An}),
         .RST(RST),

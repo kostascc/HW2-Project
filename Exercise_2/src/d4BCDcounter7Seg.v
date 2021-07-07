@@ -15,23 +15,23 @@
  * All signals are Active-HIGH!
  * EN, RST are Asynchronous.
  */
-module 4dBCDcounter7Seg(
-    output wire[6:0] LED[3:0],
-    input EN, RST, LED_type_ctl
+module d4BCDcounter7Seg(
+    output wire [6:0] LED1, LED2, LED3, LED4,
+    input wire EN, RST, LED_type_ctl
 );
 
     wire[3:0] ABCD[3:0];
 
-    4dBCDcounter u_cnt (
-        .ABCD({ ABCD[3:0][3:0] }),
-        .EN  ( EN  ),
-        .RST ( RST )
+    d4BCDcounter u_cnt (
+        .ABCD({ABCD}),
+        .EN(EN),
+        .RST(RST)
     );
 
-    BCDto7Seg[3:0] u_led (
-        .LED   ({  LED[3:0][6:0] }),
-        .ABCD  ({ ABCD[3:0][3:0] }),
-        .LED_type_ctl(LED_type_ctl), 
+    BCDto7Seg u_led[3:0] (
+        .LED   ({ LED1[6:0],LED2[6:0],LED3[6:0],LED4[6:0] }),
+        .ABCD  ({ABCD}),
+        .LED_type_ctl(LED_type_ctl)
     );
 
 endmodule

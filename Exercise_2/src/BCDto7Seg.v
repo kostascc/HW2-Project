@@ -15,13 +15,12 @@
  *                  HIGH = Common Anode
  */
 module BCDto7Seg (
-    output[6:0] LED,    // 7 Seg.
-    input[3:0] ABCD,    // BCD
-    input LED_type_ctl, // LED type
+    output wire[6:0] LED,    // 7 Seg.
+    input wire[3:0] ABCD,    // BCD
+    input LED_type_ctl // LED type
 );
 
-    wire[3:0] ABCD;
-    wire[6:0] LED;
+    wire A,B,C,D,a,b,c,d,e,f,g;
 
     assign {A,B,C,D}        = {ABCD[3:0]};
     assign {a,b,c,d,e,f,g}  = { LED[6:0]};
@@ -65,7 +64,7 @@ module BCDto7Seg (
 
     // Tristate Inverters
     // (controlling the LED output type)
-    notif1  u_final ({a,b,c,d,e,f,g}, {a_,b_,c_,d_,e_,f_,g_}, LED_type_ctl);
+    notif1  u_final[6:0] ({a,b,c,d,e,f,g}, {a_,b_,c_,d_,e_,f_,g_}, LED_type_ctl);
 
     // TODO: Create a TB
 
