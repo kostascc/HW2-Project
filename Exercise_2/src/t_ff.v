@@ -1,46 +1,38 @@
 /**
  * Author:
- *   Shubham Pandey
+ *   Konstantinos Chatzis
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
 
 /**
  * Master-Slave T-FF
- * negative edge triggered.
- * 
- * source: github.com/spdy1895
+ * Positive Edge Triggered,
+ * RST is active-HIGH.
  */
-module tff ( 
+module t_ff ( 
     output wire Q, Qn,
-    input wire T, CLK, RST 
+    input wire RST, T, CLK 
 );
 
-wire w1, w2, w3, w4, w5, w6, d;
+wire j, k;
+assign j = T;
+assign k = T;
 
-// TODO: Change to positive edge triggered 
-
-wire _CLK;
-assign clk = _CLK;
-
-not u0(_CLK, CLK);
-not u1(_clk, clk);
-not u2(_clr, RST);
-not u3(_d, d);
-
-xor ux(d, T, Q);
-
-// Master
-nand u4(w1, d, _clr, clk);
-nand u5(w2, clk, _d);
-nand u6(w3, w1, w4);
-nand u7(w4, w3, _clr, w2);
+wire RSTn, CLKn;
+not u_nrst (RSTn, RST);
+not u_nclk (CLKn, CLK);
 
 // Slave
-nand u8(w5, w3, _clr, _clk);
-nand u9(w6, _clk, w4);
-nand u10(Q, w5, Qn);
-nand u11(Qn, Q, _clr, w6);
+nand n0(Q, e, Qn);
+nand n1(Qn, f, RSTn, Q);
+nand n2(e, c, RSTn, CLK);
+nand n3(f, d, CLK);
 
+// Master
+nand n4(c, a, d);
+nand n5(d, b, c, RSTn);
+nand n6(a, j, CLKn, Qn, RSTn);
+nand n7(b, k, CLKn, Q);
 
-endmodule //dff
+endmodule

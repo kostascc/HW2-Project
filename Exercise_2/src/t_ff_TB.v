@@ -1,14 +1,19 @@
-`timescale 1ns/100ps
+`timescale 10ns/1ns
 module t_ff_TB;
 
-    // TODO: convert TB to use the new T-FF (if needed)
-    reg T, CLK, INIT;
+    reg T, CLK, INIT, tmp;
 
     wire Q, Qbar;
     reg expectedOut, rst;
     reg [31:0] i;
 
-    t_ff dut( Q, Qbar, T, CLK, INIT ); 
+    t_ff dut( 
+        .Q(Q), 
+        .Qn(Qbar), 
+        .T(T), 
+        .CLK(CLK), 
+        .RST(INIT) 
+    ); 
     reg [2:0] testVector[20:0];
 
 initial
@@ -23,7 +28,6 @@ initial
 always@(posedge CLK)
     begin
         {INIT,T,expectedOut}=testVector[i];#10;
-        $display(INIT,T,expectedOut);
     end
 
 always@(posedge CLK)
