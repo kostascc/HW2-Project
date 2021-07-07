@@ -1,4 +1,12 @@
+/**
+ * Author:
+ *   Konstantinos Chatzis
+ *   June 2021
+ *   kachatzis <at> ece.auth.gr
+ */
+ 
 `timescale 10ns/1ns
+
 module t_ff_TB;
 
     reg T, CLK, INIT, tmp;

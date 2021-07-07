@@ -1,4 +1,11 @@
-`timescale 10ns/1ns
+/**
+ * Author:
+ *   Konstantinos Chatzis
+ *   June 2021
+ *   kachatzis <at> ece.auth.gr
+ */
+ 
+ `timescale 10ns/1ns
 
 module d4BCDcounter_TB;
 
