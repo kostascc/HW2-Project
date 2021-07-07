@@ -1,42 +1,56 @@
-`timescale 1ns/100ps
+`timescale 10ns/1ns
 module d_ff_TB;
 
-    reg expectedOut;
-    reg [31:0] i;
-    reg [2:0] testVector[20:0];
+    reg expectedQ;
 
-    reg d, clk;
-    wire q, qbar;
+    reg D, CLK, PRST, RST;
+    wire Q, Qn;
 
-    d_ff dut(.Q(q), .Qbar(qbar), .D(d), .CLK(clk)); 
+    d_ff dut(.Q(Q), .Qn(Qn), .D(D), .CLK(CLK), .PRST(PRST), .RST(RST)); 
 
-initial
-    begin
-        $readmemb("d_ff_TBVector", testVector);
-        i = 0;
-        d = 0;
+    initial begin
+        D = 0;
+        CLK = 0;
+        RST = 1;
+        PRST = 0;
+        expectedQ = 0;
     end
 
-always @(posedge clk)
-    begin
-        {d, expectedOut} = testVector[i];
-        // $display(reset, d, expectedOut);
-        
-    end
+    initial begin
+        #4;
+        RST <= 0;
 
-always @(negedge clk)
-    begin
-        i = i + 1;
-        if(expectedOut !== q) begin
-            $display("Wrong output for inputs %b, %b!=%b",{d}, expectedOut, q);
-        end
-        
-    end
+        #10;
+        D <= 1;
+        expectedQ <= #1 1;
 
-always
-    begin
-        clk <= 1; #5;
-        clk <= 0; #5;
+        #10;
+        D <= 0;
+        expectedQ <= #1 0;
+
+        #4;
+        PRST <= 1;
+        expectedQ <= 1;
+
+        #4;
+        RST <= 1;
+        expectedQ <= 0;
+
+        #2;
+        RST <= 0;
+        expectedQ <= #1 1;
+
+        #10;
+        PRST <= 0;
+        expectedQ <= #1 0;
+
+        #10;
+        D <= 1;
+        expectedQ <= #1 1;
+
+    end
+    always begin
+        #5 CLK <= ~CLK;
     end
 
 endmodule

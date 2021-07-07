@@ -22,6 +22,7 @@ module dFSM (
         ENA = 0;
     end
 
+
     // D2' = ~D1 * ~D2 * X
     assign D[2] =   (RST)? 0 :
                     ~Q[1] && ~Q[2] && X;
