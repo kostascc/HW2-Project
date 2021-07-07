@@ -15,15 +15,15 @@
  *                  HIGH = Common Anode
  */
 module BCDto7Seg (
-    output wire[6:0] LED,    // 7 Seg.
-    input wire[3:0] ABCD,    // BCD
-    input LED_type_ctl // LED type
+    output wire[6:0] LED,   // 7 Seg.
+    input wire[3:0] ABCD,   // BCD
+    input LED_type_ctl      // LED type
 );
 
     wire A,B,C,D,a,b,c,d,e,f,g;
 
-    assign {A,B,C,D}        = {ABCD[3:0]};
-    assign {a,b,c,d,e,f,g}  = { LED[6:0]};
+    assign {A,B,C,D}  = {ABCD[3:0]}     ;
+    assign {LED[6:0]} = {a,b,c,d,e,f,g} ;
 
     // Inverters
     not u_An (_A, A),
@@ -45,26 +45,27 @@ module BCDto7Seg (
     // OR gates
     or  // a
         u_a1    (n_a1,    A,    C,   BD),
-        u_a0    (a_,   n_a1, BnDn      ),
+        u_a0    (na,   n_a1, BnDn      ),
         // b
-        u_b0    (b_,     _B, CnDn,   CD),
+        u_b0    (nb,     _B, CnDn,   CD),
         // c
-        u_c0    (c_,      B,   _C,    D),
+        u_c0    (nc,      B,   _C,    D),
         // d
         u_d1    (n_d1, BnDn,  CDn, BCnD),
-        u_d0    (d_,   n_d1,  BnC,    A),
+        u_d0    (nd,   n_d1,  BnC,    A),
         // e
-        u_e0    (e_,   BnDn,  CDn      ),
+        u_e0    (ne,   BnDn,  CDn      ),
         // f
         u_f1    (n_f1,    A, CnDn,  BCn),
-        u_f0    (f_,   n_f1,  BDn      ),
+        u_f0    (nf,   n_f1,  BDn      ),
         // g
         u_g1    (n_g1,    A,  BCn,  BnC),
-        u_g0    (g_,   n_g1,  CDn      );
+        u_g0    (ng,   n_g1,  CDn      );
 
     // Tristate Inverters
     // (controlling the LED output type)
-    notif1  u_final[6:0] ({a,b,c,d,e,f,g}, {a_,b_,c_,d_,e_,f_,g_}, LED_type_ctl);
+    bufif0  u_bf[6:0] ({a,b,c,d,e,f,g}, {na,nb,nc,nd,ne,nf,ng}, LED_type_ctl);
+    notif1  u_nf[6:0] ({a,b,c,d,e,f,g}, {na,nb,nc,nd,ne,nf,ng}, LED_type_ctl);
 
     // TODO: Create a TB
 
