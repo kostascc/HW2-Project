@@ -14,8 +14,9 @@
  * PRST: Sets the JK-FF to the preset Q=1.
  */
 module jk_ff (
-    input wire J, K, CLK,
-    output reg Q, Qn, RST, PRST );
+    output reg Q, Qn,
+    input wire J, K, CLK, RST, PRST 
+);
 
     assign Qn = ~Q;
 

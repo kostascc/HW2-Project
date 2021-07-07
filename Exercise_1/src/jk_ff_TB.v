@@ -1,45 +1,88 @@
-`timescale 1ns/100ps
+`timescale 10ns/1ns
 module jk_ff_TB;
 
-    reg expectedOut;
-    reg [31:0] i;
-    reg [2:0] testVector[7:0];
+    reg expectedQ;
 
-    reg j, k, clk, reset, tmp;
-    wire q, qbar;
+    reg J, K, CLK, PRST, RST;
+    wire Q, Qn;
 
-    jk_ff dut(.Q(q), .Qbar(qbar), .J(j), .K(k), .CLK(clk)); 
+    jk_ff dut(
+        .Q(Q), 
+        .Qn(Qn), 
+        .J(J), 
+        .K(K),
+        .CLK(CLK), 
+        .PRST(PRST), 
+        .RST(RST)
+    ); 
 
-initial
-    begin
-        $readmemb("jk_ff_TBVector", testVector);
-        i = 0; 
-        j = 0;
-        k = 0;
+    initial begin
+        J = 0;
+        K = 0;
+        CLK = 0;
+        RST = 1;
+        PRST = 0;
+        expectedQ = 0;
     end
 
-always @(posedge clk)
-    begin
-        {j, k, tmp} = testVector[i];
-        // $display(reset, d, expectedOut);
-        
+    initial begin
+        #4;
+        RST = 0;
+
+        #10;
+        J <= 1;
+        expectedQ <= #1 1;
+
+        #10;
+        J <= 0;
+        K <= 1;
+        expectedQ <= #1 0;
+
+        #10;
+        J <= 1;
+        K <= 1;
+        expectedQ <= #1 ~expectedQ;
+
+        #10;
+        J <= 1;
+        K <= 1;
+        expectedQ <= #1 ~expectedQ;
+
+        #10;
+        J <= 0;
+        K <= 0;
+
+        #10;
+        RST <= 1;
+        expectedQ <= 0;
+
+        #10;
+        RST <= 0;
+        PRST <= 1;
+        expectedQ <= 1;
+
+        #10;
+        RST <= 1;
+        PRST <= 1;
+        expectedQ <= 0;
+
+        #10;
+        J <= 1;
+        K <= 1;
+
+        #10;
+        RST <= 0;
+        PRST <= 0;
+        J <= 0;
+        K <= 1;
+        expectedQ <= 0;
+
+        #10;
+        K <= 0;
     end
 
-always @(negedge clk)
-    begin
-        {j, k, expectedOut} = testVector[i];
-        #4
-        i = i + 1;
-        if(expectedOut !== q) begin
-            $display("Wrong output for inputs %b, %b!=%b",{j, k}, expectedOut, q);
-        end
-        
-    end
-
-always
-    begin
-        clk <= 1; #5;
-        clk <= 0; #5;
+    always begin
+        #5 CLK <= ~CLK;
     end
 
 endmodule
