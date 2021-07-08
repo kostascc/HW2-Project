@@ -6,7 +6,7 @@
  */
 `timescale 10ns/1ns
 
-module dFSM_TB;
+module jkFSM_TB;
 
     reg CLK;
     reg RST;
@@ -16,7 +16,7 @@ module dFSM_TB;
     reg expectedY;
     integer i;
 
-    dFSM dut(.CLK(CLK), .RST(RST), .X(X), .Y(Y));
+    jkFSM dut(.CLK(CLK), .RST(RST), .X(X), .Y(Y));
     reg [2:0] testVector[17:0];
 
     initial begin

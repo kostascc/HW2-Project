@@ -4,18 +4,22 @@
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
-module dFSM (
+module jkFSM (
     output reg Y,
     input wire CLK, X, RST 
 );
 
-    reg[2:0] D;
+    reg[2:0] D, J, K;
     wire[2:0] Q;
 
     supply0 gnd;
     
-    d_ff dff[2:0] (
-        .D(D), 
+    assign J =  D;
+    assign K = ~D;
+
+    jk_ff jkff[2:0] (
+        .J(J),
+        .K(K),
         .CLK(CLK), 
         .Q(Q),
         .RST({ {2{RST}}, gnd }),

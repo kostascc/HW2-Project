@@ -1,3 +1,9 @@
+/**
+ * Author:
+ *   Konstantinos Chatzis
+ *   June 2021
+ *   kachatzis <at> ece.auth.gr
+ */
 module bFSM(
     output reg Y,
     input CLK, RST, X
