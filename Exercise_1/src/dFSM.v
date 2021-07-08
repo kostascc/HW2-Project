@@ -6,20 +6,21 @@ module dFSM (
     reg[2:0] D;
     wire[2:0] Q;
 
-    reg intCLK, ENA;
-    assign intCLK = CLK || ENA;
+    supply1 vdd;
+    supply0 gnd;
     
-    d_ff dff [2:0] (
+    d_ff dff[2:0] (
         .D(D), 
-        .CLK(intCLK), 
-        .Q(Q)
-        );
+        .CLK(CLK), 
+        .Q(Q),
+        .RST({ {2{RST}}, gnd }),
+        .PRST({ {2{gnd}}, RST })
+    );
 
     parameter rstState = 3'b001;
 
     initial begin
         D = rstState;
-        ENA = 0;
     end
 
 
@@ -46,11 +47,6 @@ module dFSM (
     // Handle Async Reset
     always @(posedge RST) begin
         D = rstState;
-        ENA = 1;
-    end
-
-    always @(posedge ENA) begin
-        ENA = #2 0;
     end
 
 endmodule
