@@ -1233,7 +1233,85 @@ endmodule
 
 ## ΙΙ.4. Απαριθμητής τεσσάρων ψηφίων
 
-​	Εφόσον έχει κατασκευαστεί έν
+​	Εφόσον έχει κατασκευαστεί ο απαριθμητής ενός ψηφίου, τώρα απαιτείται ο συνδυασμός περισσότερων απαριθμητών για την παραγωγή αριθμών από 0000 εώς 9999. Αυτό θα συμβεί με τη χρήση του παλμού *CARRY* στην έξοδο κάθε απαριθμητή (βλ. [ΙΙ.2.](#ΙΙ.2. Απαριθμητής με T-FlipFlop)).
+
+​	Το σύστημα τεσσάρων ψηφίων θα παρέχει μια έξοδο για κάθε ένα από τα ψηφία LED σε μορφή BCD (δηλαδή πριν τη μετατροπή τους για χρήση σε 7-Seg. LED) και με σειρά από MSB σε LSB *{ABCD[1], ABCD[2], ... ABCD[4]}*. Ο απαριθμητής περιέχει και τις εισόδους που συναντώνται στους απλούς απαριθμητές, δηλαδή του ασύγχρονου *RESET* και του *ΕΝ* (παλμός ενεργοποίησης όπως προκύπτει από *Gated Clock*). 
+
+```verilog
+// d4BCDcounter.v
+module d4BCDcounter(
+    output wire[3:0] ABCD1, ABCD2, ABCD3, ABCD4,
+    input EN, RST
+);
+    wire[3:0] CARRY;
+
+    BCDcounter u_bcd[3:0] (
+        .ABCD  ({ ABCD1,ABCD2,ABCD3,ABCD4 }),
+        .CARRY ({ CARRY[3:0]     }),
+        .EN    ({ CARRY[2:0], EN }),
+        .RST   ( RST )
+    );
+endmodule
+```
+
+​	Ο έλεγχος του τετραψήφιου απαριθμητή γίνεται με τη χρήση του επόμενου Testbench, όπου τίθεται στην είσοδο ένας παλμός ενεργοποίησης και ταυτοχρόνως αυξάνεται το σήμα ελέγχου κατά ένα. Σε κάθε παλμό ελέγχεται ότι η έξοδος του απαριθμητή συμφωνεί με το σήμα ελέγχου.
+
+```verilog
+// d4BCDcounter_TB.v
+`timescale 10ns/1ns
+module d4BCDcounter_TB;
+
+    reg EN, RST;
+    wire[3:0] ABCD[3:0];
+    integer iout, i1, i2, i3, i4;
+    integer expectediOut;
+    
+    d4BCDcounter dut(
+        .ABCD4( ABCD[0] ),
+        .ABCD3( ABCD[1] ),
+        .ABCD2( ABCD[2] ),
+        .ABCD1( ABCD[3] ),
+        .EN(EN),
+        .RST(RST)
+    );
+
+    // binary to decimal cenversion
+    assign i1 = {ABCD[0][3:0]};
+    assign i2 = {ABCD[1][3:0]};
+    assign i3 = {ABCD[2][3:0]};
+    assign i4 = {ABCD[3][3:0]};
+    assign iout = i1 + 10*i2 + 100*i3 + 1000*i4;
+
+    // Initialize
+    initial begin
+        	expectediOut = 0;
+        	iout = 0;
+        	RST = 1'b1;
+        	EN  = 1'b0;
+        #1;	RST = 1'b0;
+    end
+
+    // Check output
+    always begin
+        #4;
+        while(1'b1) begin
+            #1;
+            if (expectediOut != iout) begin
+                $display("Wrong output at %d",expectediOut);
+            end
+            #1 EN = ~EN;
+            if (EN==1'b1) begin
+                expectediOut = expectediOut+1;
+            end
+            if(expectediOut > 9999) begin
+                expectediOut = 0;
+            end
+        end
+    end
+endmodule
+```
+
+​	Εύκολα φαίνεται ότι ο απαριθμητής είναι σύμφωνος με τη σειρά τον αριθμών 0000-9999, καθώς και ορθά μηδενίζει όταν υπερβεί το μέγιστο όριό του. 
 
 <table style="width:100%;">
 <tr>
@@ -1244,8 +1322,6 @@ endmodule
 </figure>
 </td>
 </table>
-
-
 
 <table style="width:100%;">
 <tr>
@@ -1260,7 +1336,7 @@ endmodule
 
 ## ΙΙ.5. Απεικόνιση απαριθμητή τεσσάρων ψηφίων σε 7-Segment LEDs
 
-
+​	Τέλος, καλούμαστε να συνδυάσουμε έναν απαριθμητή τεσσάρων ψηφίων με αντίστοιχο πλήθος 7-Seg. ψηφίων LED κοινής ανόδου ή καθόδου. Όπως προαναφέρθηκε, έχει γίνει η επιλογή ότι το ολικό κύκλωμα πρέπει να περιέχει μόνο έναν ελεγκτή ενεργοποίησης (*ΕΝ*) του απαριθμητή για εξοικονόμηση χώρου. Επομένως γίνεται χρήση ενός μόνο 
 
 <table style="width:100%;">
 <tr>
