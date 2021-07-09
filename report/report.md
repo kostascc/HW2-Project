@@ -43,17 +43,18 @@
 
 ## Ι.1. Ανάλυση
 
-​	Στο πρώτο μέρος της εργασίας ασχολούμαστε με την υλοποίηση ενός πεπερασμένου αυτομάτου (FSM). Ακολουθώντας το γράφο του αυτομάτου, σκοπός μας είναι η εξαγωγή των καταστάσεων σε μορφή υλοποιήσιμη για ένα λογικό κύκλωμα. Ευτυχώς, μας δίνεται η δυνατότητα να περιγράψουμε ένα τέτοιο "σύστημα" χωρίς την παρακάτω ανάλυση, χρησιμοποιόντας την απλούστερη συμπεριφορική Verilog. Παρ' όλα αυτά η ανάλυση που γίνεται εδώ θα χρησιμοποιηθεί για την υλοποίηση του κυκλώματος με F και JK Flip Flops.
+​	Στο πρώτο μέρος της εργασίας ασχολούμαστε με την υλοποίηση ενός πεπερασμένου αυτομάτου (FSM). Ακολουθώντας το γράφο του αυτομάτου, σκοπός μας είναι η εξαγωγή των καταστάσεων σε μορφή υλοποιήσιμη για ένα λογικό κύκλωμα. Ευτυχώς, μας δίνεται η δυνατότητα να περιγράψουμε ένα τέτοιο "σύστημα" χωρίς την παρακάτω ανάλυση, χρησιμοποιώντας την απλούστερη συμπεριφορική Verilog. Παρ' όλα αυτά η ανάλυση που γίνεται εδώ θα χρησιμοποιηθεί για την υλοποίηση του κυκλώματος με F και JK Flip Flops.
 
 <table style="width:100%;">
 <tr>
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/fsm_graph.PNG" style="width:25%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.5: Ο Γράφος του FSM.</figcaption>
+  <figcaption>Εικόνα I.1: Ο Γράφος του FSM.</figcaption>
 </figure>
 </td>
 </table>
+
 Επομένως γίνεται κωδικοποίηση των καταστάσεων του FSM σύμφωνα με τον παρακάτω πίνακα.
 
 | Κατάσταση | D2   | D1   | D0   |
@@ -80,24 +81,24 @@
 |  1   |  0   |  0   |   0   |  0   |  1   |  0   |   0    |
 |  1   |  0   |  0   |   1   |  0   |  1   |  1   |   0    |
 
-Από τον παραπάνω πίνακα εύκοκλα μπορεί να γίνει εξαγωγή των τελιικών εξισώσεων, με τη χρήση πινάκων Karnaugh.
-
+Από τον παραπάνω πίνακα εύκολα μπορεί να γίνει εξαγωγή των τελικών εξισώσεων, με τη χρήση πινάκων Karnaugh.
 
 <table style="width:100%;">
 <tr>
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/karnaught_d0_white.PNG" style="width:200px; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.1: Πίνακας karnaugh D0'.</figcaption>
+  <figcaption>Εικόνα I.2: Πίνακας karnaugh D0'.</figcaption>
 </figure>
 </td>
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/karnaught_d1_white.PNG" style="width:200px; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.2: Πίνακας karnaugh D1'.</figcaption>
+  <figcaption>Εικόνα I.3: Πίνακας karnaugh D1'.</figcaption>
 </figure>
 </td>
 </table>
+
 
 
 <table style="width:100%;">
@@ -105,16 +106,17 @@
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/karnaught_d2_white.PNG" style="width:200px; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.3: Πίνακας karnaugh D2'.</figcaption>
+  <figcaption>Εικόνα I.4: Πίνακας karnaugh D2'.</figcaption>
 </figure>
 </td>
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/karnaught_y_white.PNG" style="width:200px; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.4: Πίνακας karnaugh Y.</figcaption>
+  <figcaption>Εικόνα I.5: Πίνακας karnaugh Y.</figcaption>
 </figure>
 </td>
 </table>
+
 Έτσι παίρνουμε τις τέσσερις παρακάτω εξισώσεις, οι οποίες μας δείχνουν την κατάσταση στην οποία μεταβαίνει το σύστημα συναρτήσει της κατάστασης στην οποία βρίσκεται και της εισόδου του.
 
 
@@ -279,27 +281,29 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/bFSM_1_TB.PNG" style="width:80%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.5: Behavioural FSM Testbench - Σύγχρονες είσοδοι.</figcaption>
+  <figcaption>Εικόνα I.6: Behavioural FSM Testbench - Σύγχρονες είσοδοι.</figcaption>
 </figure>
 </td>
 </table>
-​	Στη δεύτερη προσωμοίωση παρουσιάζεται και η λειτουργία του FSM για ασύγχρονο *RESET*, καθώς και τι συμβαίνει όταν δοθεί είσοδος *X* στο κύκλωμα λίγο πριν την ανερχόμενη ακμή του ρολογιού. Εδώ, όπως είναι φυσικό, η επόμενη κατάσταση *(nextState)* του συστήματος αλλάζει, και ταυτόχρονα παρατηρείται και μια μεταβολή στην έξοδο *Y*. H έξοδος του συστήματος, λοιπόν, είναι και αυτή ασύγχρονη καθώς το κύκλωμα είναι τύπου *"Mealy"*. 
+
+​	Στη δεύτερη προσομοίωση παρουσιάζεται και η λειτουργία του FSM για ασύγχρονο *RESET*, καθώς και τι συμβαίνει όταν δοθεί είσοδος *X* στο κύκλωμα λίγο πριν την ανερχόμενη ακμή του ρολογιού. Εδώ, όπως είναι φυσικό, η επόμενη κατάσταση *(nextState)* του συστήματος αλλάζει, και ταυτόχρονα παρατηρείται και μια μεταβολή στην έξοδο *Y*. H έξοδος του συστήματος, λοιπόν, είναι και αυτή ασύγχρονη καθώς το κύκλωμα είναι τύπου *"Mealy"*. 
 <table style="width:100%;">
 <tr>
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/bFSM_2_TB.PNG" style="width:80%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.6: Behavioural FSM Testbench. - Ασύγχρονες είσοδοι.</figcaption>
+  <figcaption>Εικόνα I.7: Behavioural FSM Testbench. - Ασύγχρονες είσοδοι.</figcaption>
 </figure>
 </td>
 </table>
 
 
+
 ##Ι.3. Υλοποίηση με D-FlipFlop
 
-​	Συνέχεια έχει η υλοποίηση του κυκλώματος με D Flip Flops. Εδώ αναπαρηστούμε την τρέχουσα και επόμενη κατάσταση του συστήματος και την έξοδο και είσοδο των Flip Flops  αντίστοιχα. Εύκολα καταλαβαίνουμε, λοιπόν, ότι θα χρησιμοποιηθούν τρία Flip Flop, ένα για κάθε bit της κωδικοποίησης των καταστάσεων. Η είσοδος των Flip Flop αυτών θα περιέχει συνδυαστική λογική από την τρέχουσα κατάσταση (έξοδο των ίδιων Flip Flop) καθώς και την είσοδο του συστήματος *(X)*.
+​	Συνέχεια έχει η υλοποίηση του κυκλώματος με D Flip Flops. Εδώ αναπαριστούμε την τρέχουσα και επόμενη κατάσταση του συστήματος και την έξοδο και είσοδο των Flip Flops  αντίστοιχα. Εύκολα καταλαβαίνουμε, λοιπόν, ότι θα χρησιμοποιηθούν τρία Flip Flop, ένα για κάθε bit της κωδικοποίησης των καταστάσεων. Η είσοδος των Flip Flop αυτών θα περιέχει συνδυαστική λογική από την τρέχουσα κατάσταση (έξοδο των ίδιων Flip Flop) καθώς και την είσοδο του συστήματος *(X)*.
 
-​	Αρχικά παρουσιάζεται η υλοποίηση του D Flip Flop με συμπεριφορική Verilog, λειτουργίας στην ανερχόμενη ακμή του ρολογιού και με *active-HIGH* σήμα RESET. Σημειώνεται ότι λόγω της φύσης του FSM, το οποίο απαιτεί επανεκίνηση σε θέση διάφορη του μηδενός *(001)*, έχει υλοποιηθεί μια παραλλαγή του D Flip Flop το οποίο περιέχει μια ασύγχρονη είσοδο *PRESET*. Η είσοδος αυτή προκαλεί ασύγχρονη μετάβαση του Flip Flop στη θέση *Q=1*, αντί για *Q=0* που προκαλείται από το *RESET*. Παρ' όλα αυτά, η λειτουργία του *RESET* έχει επιλεχθεί να επεγγράφει αυτή του *PRESET*, κάτι το οποίο φαίνεται και στην επόμενη προσωμοίωση.
+​	Αρχικά παρουσιάζεται η υλοποίηση του D Flip Flop με συμπεριφορική Verilog, λειτουργίας στην ανερχόμενη ακμή του ρολογιού και με *active-HIGH* σήμα RESET. Σημειώνεται ότι λόγω της φύσης του FSM, το οποίο απαιτεί επανεκκίνηση σε θέση διάφορη του μηδενός *(001)*, έχει υλοποιηθεί μια παραλλαγή του D Flip Flop το οποίο περιέχει μια ασύγχρονη είσοδο *PRESET*. Η είσοδος αυτή προκαλεί ασύγχρονη μετάβαση του Flip Flop στη θέση *Q=1*, αντί για *Q=0* που προκαλείται από το *RESET*. Παρ' όλα αυτά, η λειτουργία του *RESET* έχει επιλεχθεί να υπερισχύει αυτής του *PRESET*, κάτι το οποίο φαίνεται και στην επόμενη προσομοίωση.
 
 ```verilog
 // d_ff.v
@@ -376,10 +380,11 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/d_ff_TB.PNG" style="width:70%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.5: D-FF Testbench.</figcaption>
+  <figcaption>Εικόνα I.8: D-FF Testbench.</figcaption>
 </figure>
 </td>
 </table>
+
 ​	Μετά την κατασκευή του D Flip Flop, μπορούμε να χρησιμοποιήσουμε τις εξισώσεις επόμενης κατάστασης (βλ. [Ι.1.](#Ι.1. ανάλυση)) για την κατασκευή της συνδυαστική λογικής του FSM. H συνδυαστική λογική αυτή δίνεται ως είσοδος στα τρία D-FF, όπου η είσοδος αυτή "περνά" στην έξοδο των Flip Flop στον επόμενο κτύπο ρολογιού, και η επόμενη κατάσταση γίνεται η τρέχουσα. Σημειώνεται ότι γίνεται χρήση της λειτουργίας *PRESET* των Flip Flop, εφαρμόζοντας το σήμα *RESET* στην είσοδο *RESET* στα δυο πρώτα Flip Flop, και στην είσοδο *PRESET* στο τρίτο. Αυτό γίνεται για  την αποκατάσταση του κυκλώματος στη προεπιλεγμένη κατάσταση *Α (001)* μετά από ασύγχρονο παλμό στο σήμα *RESET* του FSM.
 
 ```verilog
@@ -482,16 +487,16 @@ endmodule
 
 ​	Παρακάτω παρουσιάζεται η προσωμοίωση του FSM με D Flip Flops. Φυσικά η προσομοίωση αυτή δεν διαφέρει από αυτή του FSM με συμπεριφορική Verilog.
 
-
 <table style="width:100%;">
 <tr>
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/dFSM_TB.PNG" style="width:80%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.5: Testbench του FSM με D-FF.</figcaption>
+  <figcaption>Εικόνα I.9: Testbench του FSM με D-FF.</figcaption>
 </figure>
 </td>
 </table>
+
 
 
 ##Ι.4. Υλοποίηση με JK-FlipFlop
@@ -595,10 +600,11 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/jk_ff_TB.PNG" style="width:80%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.5: JK-FF Testbench.</figcaption>
+  <figcaption>Εικόνα I.10: JK-FF Testbench.</figcaption>
 </figure>
 </td>
 </table>
+
 ​	Στη συνέχεια κατασκευάζουμε το FSM που περιγράφηκε προηγουμένως με JK Flip Flops. Εδώ θα υποστηριχθεί και πάλι η ασύγχρονη λειτουργία του *RESET* με τη μέθοδο που επιλέχθηκε και στο FSM (με D-FF) της προηγούμενης ενότητας. Επομένως η μετατροπή του κυκλώματος για χρήση των JK Flip Flop γίνεται εξαιρετικά απλή: Τα τρία D-FF της προηγούμενης υλοποίησης FSM αντκαθίστανται με τρία JK-FF, όπου η είσοδός τους προκύπτει ως εξής:
 $$
 J = D\\
@@ -713,16 +719,16 @@ endmodule
 
 ​	Η προσομοίωση του FSM με JK Flip Flops δίνει επίσης τα ίδια ακριβώς αποτελέσματα με αυτά των προηγούμενων υλοποιήσεων.  
 
-
 <table style="width:100%;">
 <tr>
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_1/writing/jkFSM_TB.PNG" style="width:80%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα I.5: Testbench του FSM με JK-FF.</figcaption>
+  <figcaption>Εικόνα I.11: Testbench του FSM με JK-FF.</figcaption>
 </figure>
 </td>
 </table>
+
 
 <div style="page-break-after: always; break-after: page;"></div>
 
@@ -737,10 +743,11 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/counter_circuit.PNG" style="width:85%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Κύκλωμα BCD απαριθμητή με T-FF.</figcaption>
+  <figcaption>Εικόνα II.1: Κύκλωμα BCD απαριθμητή με T-FF.</figcaption>
 </figure>
 </td>
 </table>
+
 
 
 ## ΙΙ.2. Απαριθμητής με T-FlipFlop
@@ -754,10 +761,11 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/master_slave_jk_ff.gif" style="width:60%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: JK-FF από SR μανδαλωτές σε Master-Slave συνδεσμολογία.</figcaption>
+  <figcaption>Εικόνα II.2: JK-FF από SR μανδαλωτές σε Master-Slave συνδεσμολογία.</figcaption>
 </figure>
 </td>
 </table>
+
 
 ```verilog
 // t_ff.v
@@ -863,7 +871,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/t_ff_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: T-FF Testbench.</figcaption>
+  <figcaption>Εικόνα II.3: T-FF Testbench.</figcaption>
 </figure>
 </td>
 </table>
@@ -969,7 +977,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/BCDcounter_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench απαριθμητή τεσσάρρων bit.</figcaption>
+  <figcaption>Εικόνα II.4: Testbench απαριθμητή τεσσάρρων bit.</figcaption>
 </figure>
 </td>
 </table>
@@ -985,7 +993,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/7SegLED.PNG" style="width:11%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: 7-Segment LED.</figcaption>
+  <figcaption>Εικόνα II.5: 7-Segment LED.</figcaption>
 </figure>
 </td>
 </table>
@@ -1004,7 +1012,7 @@ $$
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/BCDto7Seg_Truth_Table.PNG" style="width:50%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Πίνακας αληθείας 7-Segment κωδικοποίησης.</figcaption>
+  <figcaption>Εικόνα II.6: Πίνακας αληθείας 7-Segment κωδικοποίησης.</figcaption>
 </figure>
 </td>
 </table>
@@ -1150,7 +1158,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/BCDto7Seg_1_TB.PNG" style="width:100%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench κωδικοποιητή BCD σε 7-Segment LED κοινής καθόδου.</figcaption>
+  <figcaption>Εικόνα II.7: Testbench κωδικοποιητή BCD σε 7-Segment LED κοινής καθόδου.</figcaption>
 </figure>
 </td>
 </table>
@@ -1160,7 +1168,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/BCDto7Seg_2_TB.PNG" style="width:100%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench κωδικοποιητή BCD σε 7-Segment LED κοινής ανόδου.</figcaption>
+  <figcaption>Εικόνα II.8: Testbench κωδικοποιητή BCD σε 7-Segment LED κοινής ανόδου.</figcaption>
 </figure>
 </td>
 </table>
@@ -1253,7 +1261,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/d4BCDcounter_1_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench απαριθμητή τεσσάρων ψηφίων - Έναρξη κυκλώματος.</figcaption>
+  <figcaption>Εικόνα II.9: Testbench απαριθμητή τεσσάρων ψηφίων - Έναρξη κυκλώματος.</figcaption>
 </figure>
 </td>
 </table>
@@ -1263,7 +1271,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/d4BCDcounter_2_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench απαριθμητή τεσσάρων ψηφίων - Αλλαγή δεκάδας.</figcaption>
+  <figcaption>Εικόνα II.10: Testbench απαριθμητή τεσσάρων ψηφίων - Αλλαγή δεκάδας.</figcaption>
 </figure>
 </td>
 </table>
@@ -1278,7 +1286,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/gated_CLK.PNG" style="width:30%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Κύκλωμα Gated Clock.</figcaption>
+  <figcaption>Εικόνα II.11: Κύκλωμα Gated Clock.</figcaption>
 </figure>
 </td>
 </table>
@@ -1289,7 +1297,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/master_slave_d_ff.gif" style="width:55%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Κύκλωμα D-FF με συνδεσμολογία Master-Slave.</figcaption>
+  <figcaption>Εικόνα II.12: Κύκλωμα D-FF με συνδεσμολογία Master-Slave.</figcaption>
 </figure>
 </td>
 </table>
@@ -1371,7 +1379,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/d_ff_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: D-FF Testbench.</figcaption>
+  <figcaption>Εικόνα II.13: D-FF Testbench.</figcaption>
 </figure>
 </td>
 </table>
@@ -1496,7 +1504,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/d4BCDcounter7Seg_1_TB.PNG" style="width:95%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench απεικόνισης απαριθμητή τεσσάρων ψηφίων σε 7-Segment LED κοινής καθόδου.</figcaption>
+  <figcaption>Εικόνα II.14: Testbench απεικόνισης απαριθμητή τεσσάρων ψηφίων σε 7-Segment LED κοινής καθόδου.</figcaption>
 </figure>
 </td>
 </table>
@@ -1506,7 +1514,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/d4BCDcounter7Seg_2_TB.PNG" style="width:95%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench απεικόνισης απαριθμητή τεσσάρων ψηφίων σε 7-Segment LED κοινής ανόδου.</figcaption>
+  <figcaption>Εικόνα II.15: Testbench απεικόνισης απαριθμητή τεσσάρων ψηφίων σε 7-Segment LED κοινής ανόδου.</figcaption>
 </figure>
 </td>
 </table>
@@ -1518,7 +1526,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_2/writing/d4BCDcounter7Seg_TB__Decade.PNG" style="width:95%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench απεικόνισης απαριθμητή τεσσάρων ψηφίων σε 7-Segment LED κοινής καθόδου - Αλλαγή δεκάδας.</figcaption>
+  <figcaption>Εικόνα II.16: Testbench απεικόνισης απαριθμητή τεσσάρων ψηφίων σε 7-Segment LED κοινής καθόδου - Αλλαγή δεκάδας.</figcaption>
 </figure>
 </td>
 </table>
@@ -1540,7 +1548,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/hamming_error_correction.PNG" style="width:60%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Πίνακας κωδικοποίησης Hamming (12,5).</figcaption>
+  <figcaption>Εικόνα III.1: Πίνακας κωδικοποίησης Hamming (12,5).</figcaption>
 </figure>
 </td>
 </table>
@@ -1733,7 +1741,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/hamEncoder125_1_TB.PNG" style="width:95%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench κωδικοποιητή - Δυαδική απεικόνιση.</figcaption>
+  <figcaption>Εικόνα III.2: Testbench κωδικοποιητή - Δυαδική απεικόνιση.</figcaption>
 </figure>
 </td>
 </table>
@@ -1744,7 +1752,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/hamEncoder125_2_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench κωδικοποιητή - Δεκαδική απεικόνιση (Α' μέρος).</figcaption>
+  <figcaption>Εικόνα III.3: Testbench κωδικοποιητή - Δεκαδική απεικόνιση (Α' μέρος).</figcaption>
 </figure>
 </td>
 </table>
@@ -1754,7 +1762,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/hamEncoder125_3_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench κωδικοποιητή - Δεκαδική απεικόνιση (Β' μέρος).</figcaption>
+  <figcaption>Εικόνα III.4: Testbench κωδικοποιητή - Δεκαδική απεικόνιση (Β' μέρος).</figcaption>
 </figure>
 </td>
 </table>
@@ -1852,7 +1860,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/hamDecoder125_1_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench αποκωδικοποιητή (Α' μέρος).</figcaption>
+  <figcaption>Εικόνα III.5: Testbench αποκωδικοποιητή (Α' μέρος).</figcaption>
 </figure>
 </td>
 </table>
@@ -1862,7 +1870,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/hamDecoder125_2_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench αποκωδικοποιητή (Β' μέρος).</figcaption>
+  <figcaption>Εικόνα III.6: Testbench αποκωδικοποιητή (Β' μέρος).</figcaption>
 </figure>
 </td>
 </table>
@@ -1877,7 +1885,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/test_hd_codec_system.PNG" style="width:40%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench αποκωδικοποιητή (Β' μέρος).</figcaption>
+  <figcaption>Εικόνα III.7: Testbench αποκωδικοποιητή (Β' μέρος).</figcaption>
 </figure>
 </td>
 </table>
@@ -1953,7 +1961,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/test_HD_codec_1_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench Απο/κωδικοποίησης σε κανάλι θορύβου - Δυαδική απεικόνιση.</figcaption>
+  <figcaption>Εικόνα III.8: Testbench Απο/κωδικοποίησης σε κανάλι θορύβου - Δυαδική απεικόνιση.</figcaption>
 </figure>
 </td>
 </table>
@@ -1965,7 +1973,7 @@ endmodule
 <td style="border: none;">
 <figure style="text-align:center;">
   <img src="../Exercise_3/writing/test_HD_codec_2_TB.PNG" style="width:90%; border: 1px solid rgb(0 0 0 / 15%)">
-  <figcaption>Εικόνα II.0: Testbench Απο/κωδικοποίησης σε κανάλι θορύβου - Δεκαδική απεικόνιση.</figcaption>
+  <figcaption>Εικόνα III.9: Testbench Απο/κωδικοποίησης σε κανάλι θορύβου - Δεκαδική απεικόνιση.</figcaption>
 </figure>
 </td>
 </table>
