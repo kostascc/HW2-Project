@@ -4,6 +4,12 @@
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
+
+ /**
+  * Decodes a 17bit signal
+  * based on the Hamming (12,5)
+  * coding scheme.
+  */
 module hamDecode125(
     output wire[12:1] OUT,
     input  wire[17:1] IN

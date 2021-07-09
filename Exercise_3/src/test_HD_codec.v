@@ -4,6 +4,16 @@
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
+
+ /**
+  * Accepts a 12bit input signal.
+  * The input is encoded based on 
+  * Hamming (12,5). A bit error is
+  * imposed on the encoded signal.
+  * The signal is the decoded again,
+  * and the output should again be the
+  * same as the input.
+  */
 module test_HD_codec(
     output wire[11:0] OUT,
     input wire[11:0] IN, 

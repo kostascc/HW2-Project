@@ -4,6 +4,10 @@
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
+
+/**
+* FSM using D-FF.
+*/
 module dFSM (
     output reg Y,
     input wire CLK, X, RST 

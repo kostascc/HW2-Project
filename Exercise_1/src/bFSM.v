@@ -4,6 +4,10 @@
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
+
+ /**
+  * FSM using behabioural Verilog.
+  */
 module bFSM(
     output reg Y,
     input CLK, RST, X

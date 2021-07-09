@@ -4,6 +4,10 @@
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
+
+/**
+* FSM using JK-FF.
+*/ 
 module jkFSM (
     output reg Y,
     input wire CLK, X, RST 

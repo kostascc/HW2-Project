@@ -4,6 +4,13 @@
  *   June 2021
  *   kachatzis <at> ece.auth.gr
  */
+
+ /**
+  * D-FF using structural verilog.
+  * RST and CLK are active HIGH.
+  * The FF works on the positive 
+  * clock edge.
+  */
 module d_ff (
     output wire Q, Qn,
     input wire D, CLK, RST

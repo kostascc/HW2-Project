@@ -5,6 +5,11 @@
  *   kachatzis <at> ece.auth.gr
  */
  `timescale 1ns/1ns
+
+ /**
+  * Encodes a 12bit signal based
+  * on the Hamming (12,5) code
+  */
  module hamEncode125(
     output reg[17:1]  OUT,
     input  wire[11:0]  IN
