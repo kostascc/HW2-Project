@@ -133,7 +133,6 @@ module bFSM(
     output reg Y,
     input CLK, RST, X
 );
-    
     // States
     localparam
         A = 3'b001,
@@ -208,12 +207,10 @@ endmodule
 // bFSM_TB.v
 `timescale 10ns/1ns
 module bFSM_TB;
-
     reg CLK, RST, X, expectedY;
     wire Y;
     integer i;
     reg [2:0] testVector[17:0];
-
     bFSM dut(.CLK(CLK), .RST(RST), .X(X), .Y(Y));
     
     // Initialize TB
@@ -249,20 +246,16 @@ module bFSM_TB;
     // Check the response on async. inputs.
     initial begin
         #165;   // Wait for the pre-determined vectors to end
-        i = 100;// Stop assigning pre-determined values
-        #3;
-        RST <= 1; // async restart
-        X <= 0;
-        expectedY <= 0;
-        #5;
-        RST <= 0;
-        expectedY <= 0;
-        #10;
-        X <= 1; // async input
-        expectedY <= 1;
-        #2;
-        X <= 0;
-        expectedY <= 0;
+        i <= 100;// Stop assigning pre-determined values
+        #3; RST <= 1; // async restart
+            X <= 0;
+            expectedY <= 0;
+        #5; RST <= 0;
+            expectedY <= 0;
+        #10;X <= 1; // async input
+            expectedY <= 1;
+        #2; X <= 0;
+            expectedY <= 0;
     end
 
     // Clock
@@ -333,7 +326,6 @@ module d_ff_TB;
 
     reg D, CLK, PRST, RST, expectedQ;
     wire Q, Qn;
-
     d_ff dut(.Q(Q), .Qn(Qn), .D(D), .CLK(CLK), .PRST(PRST), .RST(RST)); 
 
     // Initialize
@@ -347,36 +339,21 @@ module d_ff_TB;
 	
     // Test
     initial begin
-        #4;
-        RST <= 0;
-
-        #10;
-        D <= 1;
-        expectedQ <= #1 1;
-
-        #10;
-        D <= 0;
-        expectedQ <= #1 0;
-
-        #4;
-        PRST <= 1;
-        expectedQ <= 1;
-
-        #4;
-        RST <= 1;
-        expectedQ <= 0;
-
-        #2;
-        RST <= 0;
-        expectedQ <= #1 1;
-
-        #10;
-        PRST <= 0;
-        expectedQ <= #1 0;
-
-        #10;
-        D <= 1;
-        expectedQ <= #1 1;
+        #4; RST <= 0;
+        #10;D <= 1;
+            expectedQ <= #1 1;
+        #10;D <= 0;
+            expectedQ <= #1 0;
+        #4; PRST <= 1;
+            expectedQ <= 1;
+        #4; RST <= 1;
+            expectedQ <= 0;
+        #2; RST <= 0;
+            expectedQ <= #1 1;
+        #10;PRST <= 0;
+            expectedQ <= #1 0;
+        #10;D <= 1;
+            expectedQ <= #1 1;
     end
     
     // Clock
@@ -407,35 +384,27 @@ module dFSM (
 );
     reg[2:0] D;
     wire[2:0] Q;
-
     supply0 gnd;
     
     // Three D-FFs
     d_ff dff[2:0] (
-        .D(D), 
-        .CLK(CLK), 
-        .Q(Q),
-        .RST({ {2{RST}}, gnd }),
-        .PRST({ {2{gnd}}, RST })
+        .D(D),  .CLK(CLK), .Q(Q),
+        .RST({ {2{RST}}, gnd }), .PRST({ {2{gnd}}, RST })
     );
 
     localparam defState = 3'b001;
-
     initial begin
         D = defState;
     end
 
     // Next State Logic
     assign D[2] =   ( ~Q[1] && ~Q[2] && X );
-
     assign D[1] =   ( ~X && ~Q[0] && ~Q[2]           ) ||
                     (       ~Q[0] && ~Q[1] &&  Q[2]  ) ||
                     (  X &&  Q[0] &&  Q[1] && ~Q[2]  );
-
     assign D[0] =   ( ~X && ~Q[1] && ~Q[2] ) ||
                     ( ~X &&  Q[0] && ~Q[2] ) ||
                     (  X && ~Q[0] && ~Q[1] && Q[2] );
-
     // Output Logic
     assign Y = ~Q[2] && X;  
 
@@ -459,10 +428,8 @@ module dFSM_TB;
     // Initialize
     initial begin
         $readmemb("bFSM_TBVector",testVector);
-        CLK = 0;
-        i = 0;
-        RST = 1; 
-        X = 0;
+        CLK = 0;  RST = 1; 
+        i = 0;    X = 0;
     end
 
     // Set Inputs
@@ -488,24 +455,16 @@ module dFSM_TB;
     // Asynchronous test
     initial begin
         #165;   // Wait for the pre-determined vectors to end
-        i = 100;// Stop assigning pre-determined values
-
-        #3;
-        RST <= 1;
-        X <= 0;
-        expectedY <= 0;
-
-        #5;
-        RST <= 0;
-        expectedY <= 0;
-
-        #10;
-        X <= 1;
-        expectedY <= 1;
-
-        #2;
-        X <= 0;
-        expectedY <= 0;
+        i <= 100;// Stop assigning pre-determined values
+        #3; RST <= 1;
+            X <= 0;
+            expectedY <= 0;
+        #5; RST <= 0;
+            expectedY <= 0;
+        #10;X <= 1;
+            expectedY <= 1;
+        #2; X <= 0;
+            expectedY <= 0;
     end
 
     // Clock
@@ -565,76 +524,55 @@ endmodule
 // jk_ff_TB.v
 `timescale 10ns/1ns
 module jk_ff_TB;
-
     reg expectedQ;
-
     reg J, K, CLK, PRST, RST;
     wire Q, Qn;
 
     jk_ff dut(
-        .Q(Q), 
-        .Qn(Qn), 
-        .J(J), 
-        .K(K),
-        .CLK(CLK), 
-        .PRST(PRST), 
+        .Q(Q), .Qn(Qn),   .J(J), 
+        .K(K), .CLK(CLK), .PRST(PRST), 
         .RST(RST)
     ); 
 
     // Initialize
     initial begin
-        J = 0;
-        K = 0;
-        CLK = 0;
-        RST = 1;
-        PRST = 0;
+        J = 0;  K = 0; CLK = 0;
+        RST = 1; PRST = 0;
         expectedQ = 0;
     end
 
     // Test
     initial begin
-        #4;
-        RST = 0;
-        #10;
-        J <= 1;
-        expectedQ <= #1 1;
-        #10;
-        J <= 0;
-        K <= 1;
-        expectedQ <= #1 0;
-        #10;
-        J <= 1;
-        K <= 1;
-        expectedQ <= #1 ~expectedQ;
-        #10;
-        J <= 1;
-        K <= 1;
-        expectedQ <= #1 ~expectedQ;
-        #10;
-        J <= 0;
-        K <= 0;
-        #10;
-        RST <= 1;
-        expectedQ <= 0;
-        #10;
-        RST <= 0;
-        PRST <= 1;
-        expectedQ <= 1;
-        #10;
-        RST <= 1;
-        PRST <= 1;
-        expectedQ <= 0;
-        #10;
-        J <= 1;
-        K <= 1;
-        #10;
-        RST <= 0;
-        PRST <= 0;
-        J <= 0;
-        K <= 1;
-        expectedQ <= 0;
-        #10;
-        K <= 0;
+        #4;RST <= 0;
+        #10;J <= 1;
+            expectedQ <= #1 1;
+        #10;J <= 0;
+            K <= 1;
+            expectedQ <= #1 0;
+        #10;J <= 1;
+            K <= 1;
+            expectedQ <= #1 ~expectedQ;
+        #10;J <= 1;
+            K <= 1;
+            expectedQ <= #1 ~expectedQ;
+        #10;J <= 0;
+            K <= 0;
+        #10;RST <= 1;
+            expectedQ <= 0;
+        #10;RST <= 0;
+            PRST <= 1;
+            expectedQ <= 1;
+        #10;RST <= 1;
+            PRST <= 1;
+            expectedQ <= 0;
+        #10;J <= 1;
+            K <= 1;
+        #10;RST <= 0;
+            PRST <= 0;
+            J <= 0;
+            K <= 1;
+            expectedQ <= 0;
+        #10;K <= 0;
     end
 
     // CLock
@@ -669,7 +607,6 @@ module jkFSM (
 );
     reg[2:0] D, J, K;
     wire[2:0] Q;
-
     supply0 gnd;
     
     // Convert D-FF to JK-FF input
@@ -686,22 +623,18 @@ module jkFSM (
     );
 
     parameter rstState = 3'b001;
-
     initial begin
         D = rstState;
     end
 
     // Next State Logic
     assign D[2] =   ( ~Q[1] && ~Q[2] && X );
-
     assign D[1] =   ( ~X && ~Q[0] && ~Q[2]           ) ||
                     (       ~Q[0] && ~Q[1] &&  Q[2]  ) ||
                     (  X &&  Q[0] &&  Q[1] && ~Q[2]  );
-
     assign D[0] =   ( ~X && ~Q[1] && ~Q[2] ) ||
                     ( ~X &&  Q[0] && ~Q[2] ) ||
                     (  X && ~Q[0] && ~Q[1] && Q[2] );
-
     // Output Logic
     assign Y = ~Q[2] && X; 
 endmodule
@@ -753,20 +686,16 @@ module jkFSM_TB;
     // Async Test
     initial begin
         #165;   // Wait for the pre-determined vectors to end
-        i = 100;// Stop assigning pre-determined values
-        #3;
-        RST <= 1;
-        X <= 0;
-        expectedY <= 0;
-        #5;
-        RST <= 0;
-        expectedY <= 0;
-        #10;
-        X <= 1;
-        expectedY <= 1;
-        #2;
-        X <= 0;
-        expectedY <= 0;
+        i <= 100;// Stop assigning pre-determined values
+        #3;	RST <= 1;
+        	X <= 0;
+        	expectedY <= 0;
+        #5;	RST <= 0;
+        	expectedY <= 0;
+        #10;X <= 1;
+        	expectedY <= 1;
+        #2;	X <= 0;
+        	expectedY <= 0;
     end
 	
     // Clock
@@ -1594,8 +1523,6 @@ endmodule
 
 # III. Kωδικοποίηση Hamming
 
-
-
 ## III.1. Ανάλυση
 
 ​	Στο τρίτο κεφάλαιο της αναφοράς ασχολούμαστε με την υλοποίηση ενός συστήματος Κωδικοποίησης και Αποκωδικοποίησης βάσει του κώδικα Hamming (12, 5). 
@@ -1682,7 +1609,7 @@ $$
 
 
 
-## 2. Κωδικοποιητής
+## ΙΙΙ.2. Κωδικοποιητής
 
 ​	Τον παραπάνω κώδικα καλούμαστε να τον εφαρμόσουμε για μια είσοδο από 12bit, κατασκευάζοντας έναν Hamming κωδικοποιητή.
 
@@ -1828,17 +1755,91 @@ endmodule
 
 
 
-
-## 3. Αποκωδικοποιητής
+## ΙΙΙ.3. Αποκωδικοποιητής
 
 ​	Στη συνέχεια καλούμαστε να αποκωδικοποιήσουμε το σήμα μεγέθους 17bit, στην αρχική λέξη των 12bit.
 
-​	Η αποκωδικοποίηση ακολουθεί την ίδια μέθοδο με προηγουμένως, δηλαδή υπολογίζονται τα Parity bits στις πέντε θέσεις και εξάγεται η θέση σφάλματος (βλ. [ΙΙΙ.1.](#III.1. Ανάλυση)). 
+​	Η αποκωδικοποίηση ακολουθεί την ίδια μέθοδο με τον κωδικοποιητή, δηλαδή υπολογίζονται τα Parity bits και εξάγεται η θέση σφάλματος (βλ. [ΙΙΙ.1.](#III.1. Ανάλυση)). Εδώ επιλέγεται η κωδικοποιημένη είσοδος να "αποθηκεύεται" σε *reg*, και στην αποθηκευμένη αυτή λέξη να εκτελούνται οι εναλλαγές bit (όταν υπάρχει σφάλμα). Απο πλευράς σύνθεσης, υπάρχει η πιθανότητα εμφάνισης της εσφαλμένης κωδικοποιημένης λέξης για μικρό χρονικό διάστημα μετά την είσοδό της στον αποκωδικοποιητή. 
 
 ```verilog
+// hamDecode125.v
+module hamDecode125(
+    output wire[12:1] OUT,
+    input  wire[17:1] IN
+);
+    wire[5:1] PAR;
+    reg[17:1] RE;
+
+    // Parity bits
+    assign PAR[1]  = IN[1]  ^ IN[3]  ^ IN[5]  ^ 
+                     IN[7]  ^ IN[9]  ^ IN[11] ^ 
+                     IN[13] ^ IN[15] ^ IN[17] ;
+    assign PAR[2]  = IN[2]  ^ IN[3]  ^
+                     IN[6]  ^ IN[7]  ^
+                     IN[10] ^ IN[11] ^
+                     IN[14] ^ IN[15];
+    assign PAR[3]  = IN[4]  ^ IN[5]  ^ IN[6]  ^ IN[7]  ^
+                     IN[12] ^ IN[13] ^ IN[14] ^ IN[15] ;
+    assign PAR[4]  = IN[8]  ^ IN[9]  ^ IN[10] ^ IN[11] ^ IN[12] ;
+    assign PAR[5]  = IN[16] ^ IN[17] ;
+
+    // Output (ignore parity bits)
+    assign OUT = {RE[17], RE[15:9], RE[7:5], RE[3]};
+
+    // Apply error correction to output
+    always @(IN) begin: ERROR_CORRECTION
+        RE = IN;
+        // Apply Error Correction
+        case (PAR)
+            0:  disable ERROR_CORRECTION;   // No Error
+            default: {RE[PAR]} = ~{RE[PAR]};// Error at PAR
+        endcase
+    end
+endmodule
 ```
 
+​	Ο έλεγχος του αποκωδικοποιητή γίνεται με μέθοδο αντίστοιχη του ελέγχου κωδικοποίησης. Δηλαδή χρησιμοποιείται και πάλι το δοκιμαστικό αρχείο γνωστών κωδικοποιήσεων, όμως τώρα δίνεται ως είσοδος η κωδικοποιημένη λέξη, και πραγματοποιείται έλεγχος ότι η έξοδος του αποκωδικοποιητή συμπίπτει με την δοκιμαστική αποκωδικοποιημένη λέξη.
 
+```verilog
+// hamDecode125_TB.v
+`timescale 10ns/1ns
+module hamDecode125_TB;
+
+    wire[11:0] OUT;
+    reg[16:0]  IN;
+    reg clk;
+    integer i;
+    reg[28:0] testVector[23:0];
+    reg[11:0] expectedOUT;
+
+    hamDecode125 dut( .IN(IN), .OUT(OUT) );
+
+    // Initialize and loop through predifined Inputs
+    initial begin
+        clk = 0;
+        i = 0;
+        expectedOUT = {12{1'b0}};
+        $readmemb("hamEncoder125_TB_Vector", testVector);
+        #5;
+        for(i=0; i<24; i=i+1) begin
+            #10; {expectedOUT,IN} = testVector[i];
+        end
+    end
+
+    // Check output
+    always @(negedge clk) begin
+        if ({OUT[11:0]} != {expectedOUT[11:0]})
+                $display("Wrong Output at i=%d!{%b, %b}", {i}, {OUT[11:0]}, {expectedOUT[11:0]});
+    end
+
+    // Clock
+    always begin
+        #5 clk = ~clk;
+    end
+endmodule
+```
+
+​	Στις επόμενες δυο εικόνες παρουσιάζεται το αποτέλεσμα της προσομοίωσης για το Testbench του αποκωδικοποιητή. Βλέπουμε ότι μετά από είσοδο μιας κωδικοποιημένης λέξης, ο αποκωδικοποιητής ορθά επιστρέφει την αρχική. Φυσικά δεν έχουν εισαχθεί ακόμη σφάλματα στις κωδικοποιημένες λέξεις, επομένως τα Parity bit παραμένουν μηδενικά. Η δοκιμή αυτή της διόρθωσης σφαλμάτων γίνεται στο επόμενο στάδιο (βλ. [III.4.](#ΙΙΙ.4. Απο/κωδικοποίηση σε κανάλι θορύβου))
 
 <table style="width:100%;">
 <tr>
@@ -1849,8 +1850,6 @@ endmodule
 </figure>
 </td>
 </table>
-
-
 
 <table style="width:100%;">
 <tr>
@@ -1863,16 +1862,21 @@ endmodule
 </table>
 
 
+##ΙΙΙ.4. Απο/κωδικοποίηση σε κανάλι θορύβου
+
+​	Ως τελευταίο βήμα καλούμαστε να ελέγξουμε την υπόθεση ότι ο αποκωδικοποιητής μπορεί να διορθώσει σε σφάλμα σε εώς και ένα bit της κωδικοποιημένης λέξης. Για τον έλεγχο της υπόθεσης αυτή κατασκευάζουμε το ακόλουθο σύστημα.
 
 
 
-
-
-##4. Απο/κωδικοποίηση σε κανάλι θορύβου
-
-
-
-
+<table style="width:100%;">
+<tr>
+<td style="border: none;">
+<figure style="text-align:center;">
+  <img src="../Exercise_3/writing/test_hd_codec_system.PNG" style="width:40%; border: 1px solid rgb(0 0 0 / 15%)">
+  <figcaption>Εικόνα II.0: Testbench αποκωδικοποιητή (Β' μέρος).</figcaption>
+</figure>
+</td>
+</table>
 
 
 
