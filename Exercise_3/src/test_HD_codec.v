@@ -9,20 +9,22 @@ module test_HD_codec(
     input wire[11:0] IN, 
     input wire[31:0] error_bit
 );
-
-    reg[16:0] noiOUT;
+    reg[16:0]  noiOUT;
     wire[16:0] encOUT;
 
+    // Encoder
     hamEncode125 u_enc (
         .IN(IN),
         .OUT(encOUT)
     );
 
+    // Decoder
     hamDecode125 u_dec (
         .IN(noiOUT),
         .OUT(OUT)
     );
 
+    // Impose a bit error
     always @(IN) begin
         if(error_bit > 11) begin
             noiOUT = encOUT;
