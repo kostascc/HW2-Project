@@ -22,6 +22,7 @@ module jk_ff_TB;
         .RST(RST)
     ); 
 
+    // Initialize
     initial begin
         J = 0;
         K = 0;
@@ -31,6 +32,7 @@ module jk_ff_TB;
         expectedQ = 0;
     end
 
+    // Test
     initial begin
         #4;
         RST = 0;
@@ -87,6 +89,7 @@ module jk_ff_TB;
         K <= 0;
     end
 
+    // CLock
     always begin
         #5 CLK <= ~CLK;
     end

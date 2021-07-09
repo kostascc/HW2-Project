@@ -20,14 +20,13 @@ module d_ff (
 
     assign Qn = ~Q;
     
-    always @(posedge CLK or posedge RST or posedge PRST) 
-    begin
+    always @(posedge CLK or posedge RST or posedge PRST) begin
         if( RST ) begin
-            Q  <= 0;
+            Q  <= 0;    // Reset
         end else if ( PRST ) begin 
-            Q  <= 1;
+            Q  <= 1;    // Preset
         end else begin
-            Q  <= D; 
+            Q  <= D;    // Set
         end
     end 
 

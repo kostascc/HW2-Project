@@ -20,20 +20,19 @@ module jk_ff (
 
     assign Qn = ~Q;
 
-    always @(posedge CLK or posedge RST or posedge PRST) 
-    begin
+    always @(posedge CLK or posedge RST or posedge PRST) begin
         if (RST) begin
-            Q <= 0;
+            Q <= 0; // Reset
         end else if (PRST) begin
-            Q <= 1;
+            Q <= 1; // Preset
         end else if ( J & K ) begin
-            Q <= ~Q; 
+            Q <= ~Q;// Switch
         end else if ( J ) begin
-            Q <= 1;
+            Q <= 1; // Set
         end else if ( K ) begin
-            Q <= 0;
+            Q <= 0; // Unset
         end else begin
-            Q <= 0;
+            Q <= 0; // Default: Reset
         end
     end 
 

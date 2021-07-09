@@ -14,6 +14,7 @@ module jkFSM (
 
     supply0 gnd;
     
+    // Convert D-FF to JK-FF input
     assign J =  D;
     assign K = ~D;
 
@@ -32,6 +33,7 @@ module jkFSM (
         D = rstState;
     end
 
+    // Next State Logic
     assign D[2] =   ( ~Q[1] && ~Q[2] && X );
 
     assign D[1] =   ( ~X && ~Q[0] && ~Q[2]           ) ||
@@ -42,6 +44,7 @@ module jkFSM (
                     ( ~X &&  Q[0] && ~Q[2] ) ||
                     (  X && ~Q[0] && ~Q[1] && Q[2] );
 
+    // Output Logic
     assign Y = ~Q[2] && X;  
 
 endmodule

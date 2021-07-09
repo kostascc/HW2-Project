@@ -14,6 +14,7 @@ module dFSM (
 
     supply0 gnd;
     
+    // Three D-FFs
     d_ff dff[2:0] (
         .D(D), 
         .CLK(CLK), 
@@ -22,12 +23,13 @@ module dFSM (
         .PRST({ {2{gnd}}, RST })
     );
 
-    parameter rstState = 3'b001;
+    localparam defState = 3'b001;
 
     initial begin
-        D = rstState;
+        D = defState;
     end
 
+    // Next States
     assign D[2] =   ( ~Q[1] && ~Q[2] && X );
 
     assign D[1] =   ( ~X && ~Q[0] && ~Q[2]           ) ||
@@ -38,6 +40,7 @@ module dFSM (
                     ( ~X &&  Q[0] && ~Q[2] ) ||
                     (  X && ~Q[0] && ~Q[1] && Q[2] );
 
+    // Output
     assign Y = ~Q[2] && X;  
 
 endmodule

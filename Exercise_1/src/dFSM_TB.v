@@ -8,17 +8,14 @@
 
 module dFSM_TB;
 
-    reg CLK;
-    reg RST;
-    reg X;
-
+    reg CLK, RST, X, expectedY;
     wire Y;
-    reg expectedY;
     integer i;
 
     dFSM dut(.CLK(CLK), .RST(RST), .X(X), .Y(Y));
     reg [2:0] testVector[17:0];
 
+    // Initialize
     initial begin
         $readmemb("bFSM_TBVector",testVector);
         CLK = 0;
@@ -27,12 +24,14 @@ module dFSM_TB;
         X = 0;
     end
 
+    // Set Inputs
     always@(posedge CLK) begin
         if (i <= 18) begin
             {RST,X,expectedY} = testVector[i];
         end
     end
 
+    // Check Output
     always@(negedge CLK)
     begin
         if(i <= 18) begin
@@ -45,6 +44,7 @@ module dFSM_TB;
         end
     end
 
+    // Asynchronous test
     initial begin
         #165;   // Wait for the pre-determined vectors to end
         i = 100;// Stop assigning pre-determined values
@@ -65,9 +65,9 @@ module dFSM_TB;
         #2;
         X <= 0;
         expectedY <= 0;
-
     end
 
+    // Clock
     always begin
         #5 CLK <= ~CLK;
     end

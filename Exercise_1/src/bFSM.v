@@ -9,7 +9,7 @@ module bFSM(
     input CLK, RST, X
 );
     
-    
+    // States
     localparam
         A = 3'b001,
         B = 3'b100,
@@ -18,20 +18,19 @@ module bFSM(
         E = 3'b000;
     reg[2:0] currentState, nextState;
 
+    // Current state control
     always @(posedge CLK or posedge RST)
     begin: STATE_MEMORY
-
         if (RST) begin
             currentState <= A ;
         end else begin
             currentState <= nextState;
         end
-
     end
 
+    // Next state control
     always @(currentState or X)
     begin: NEXT_STATE_LOGIC
-
         case(currentState)
             E: nextState = (X)? B : D;
             A: nextState = (X)? B : A;
@@ -40,15 +39,12 @@ module bFSM(
             B: nextState = (X)? D : C;
             default: nextState = A;
         endcase
-
     end
     
-
+    // Output (Y) control
     always @(currentState or X)
     begin: OUTPUT_LOGIC
-
         Y = (X) & (1'b1-currentState[2]);
-
     end
 
 endmodule

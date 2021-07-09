@@ -14,6 +14,7 @@ module d_ff_TB;
 
     d_ff dut(.Q(Q), .Qn(Qn), .D(D), .CLK(CLK), .PRST(PRST), .RST(RST)); 
 
+    // Initialize
     initial begin
         D = 0;
         CLK = 0;
@@ -22,6 +23,7 @@ module d_ff_TB;
         expectedQ = 0;
     end
 
+    // Test
     initial begin
         #4;
         RST <= 0;
@@ -55,6 +57,8 @@ module d_ff_TB;
         expectedQ <= #1 1;
 
     end
+
+    // Clock
     always begin
         #5 CLK <= ~CLK;
     end
