@@ -5,8 +5,7 @@
  *   kachatzis <at> ece.auth.gr
  */
  
- `timescale 10ns/1ns
-
+`timescale 10ns/1ns
 module d4BCDcounter_TB;
 
     reg EN, RST;
@@ -25,16 +24,12 @@ module d4BCDcounter_TB;
     integer expectediOut;
 
     assign i1 = {ABCD[0][3:0]};
-    assign     i2 = {ABCD[1][3:0]};
-    assign    i3 = {ABCD[2][3:0]};
-    assign     i4 = {ABCD[3][3:0]};
+    assign i2 = {ABCD[1][3:0]};
+    assign i3 = {ABCD[2][3:0]};
+    assign i4 = {ABCD[3][3:0]};
     assign iout = i1 + 10*i2 + 100*i3 + 1000*i4;
 
-    // always @begin
-    //     #0.1;
-    //     iout <= i1 + 10*i2 + 100*i3 + 1000*i4;
-    // end
-
+    // Initialize
     initial begin
         expectediOut = 0;
         iout = 0;
@@ -45,6 +40,7 @@ module d4BCDcounter_TB;
         RST = 1'b0;
     end
 
+    // Check output
     always begin
         #4;
         while(1'b1) begin

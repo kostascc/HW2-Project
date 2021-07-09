@@ -21,12 +21,14 @@ module d4BCDcounter7Seg_TB;
     integer i;
     reg[6:0] normalizedLEDOut;
 
+    // connect counter output to 7-Seg encoder.
     assign {
         LEDout[3][6:0],LEDout[2][6:0],LEDout[1][6:0],LEDout[0][6:0]
         } = {
         LED4[6:0],LED3[6:0],LED2[6:0],LED1[6:0]
     };
 
+    // Initialize
     initial begin
         LED_type_ctl = 1'b0;
         EN = 1'b0;
@@ -34,12 +36,10 @@ module d4BCDcounter7Seg_TB;
         CLK = 1'b0;
     end
 
+    // Set EN, RST
     initial begin
-        #4;
-        RST = 1'b0;
-
-        #20;
-        EN = 1'b1;
+        #4;  RST = 1'b0;
+        #20; EN = 1'b1;
     end
 
     // Convert 7-Seg. to Decimal
@@ -61,10 +61,9 @@ module d4BCDcounter7Seg_TB;
         end
     end
 
+    // Clock
     always begin
         #5 CLK = ~CLK;
     end
-
-    
 
 endmodule

@@ -5,8 +5,7 @@
  *   kachatzis <at> ece.auth.gr
  */
  
- `timescale 10ns/1ns;
-
+`timescale 10ns/1ns;
 module BCDcounter_TB;
 
     wire[3:0] ABCD;
@@ -22,7 +21,7 @@ module BCDcounter_TB;
         .CARRY(CARRY)
     );
 
-
+    // Initialize
     initial begin
         EN = 0;
         RST = 1;
@@ -36,6 +35,7 @@ module BCDcounter_TB;
         expectedOut = 4'b0000;
     end
 
+    // Test
     initial begin
         expectedOut = 4'b0000;
 
@@ -76,6 +76,7 @@ module BCDcounter_TB;
         expectedOut = 4'b0010;
     end
 
+    // Enable Signal
     always begin
         #5 EN = ~EN;
     end

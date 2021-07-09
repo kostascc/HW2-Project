@@ -25,7 +25,6 @@ module BCDcounter(
 );
     
     supply1 vdd;
-
     wire A, B, C, D;
     assign {ABCD[3:0]} = {D,C,B,A};
 

@@ -62,11 +62,9 @@ module BCDto7Seg (
         u_g1    (n_g1,    A,  BCn,  BnC),
         u_g0    (ng,   n_g1,  CDn      );
 
-    // Tristate Inverters
+    // Tristate Buffers
     // (controlling the LED output type)
     bufif0  u_bf[6:0] ({a,b,c,d,e,f,g}, {na,nb,nc,nd,ne,nf,ng}, LED_type_ctl);
     notif1  u_nf[6:0] ({a,b,c,d,e,f,g}, {na,nb,nc,nd,ne,nf,ng}, LED_type_ctl);
-
-    // TODO: Create a TB
 
 endmodule

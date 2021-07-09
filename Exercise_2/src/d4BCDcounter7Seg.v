@@ -26,7 +26,6 @@ module d4BCDcounter7Seg(
 
     //Clock Gating
     wire GCLK, nDQ;
-
     d_ff u_dff(
         .RST(RST),
         .CLK(CLK),
@@ -34,10 +33,9 @@ module d4BCDcounter7Seg(
         .Q(nDQ),
         .Qn(Qn)
     );
-
     and u_a1( GCLK, nDQ, CLK );
 
-
+    // Counters
     d4BCDcounter u_cnt (
         .ABCD1({ABCD[0]}),
         .ABCD2({ABCD[1]}),
@@ -47,6 +45,7 @@ module d4BCDcounter7Seg(
         .RST(RST)
     );
 
+    // 7-Seg converters
     BCDto7Seg u_led[3:0] (
         .LED   ({ LED1[6:0],LED2[6:0],LED3[6:0],LED4[6:0] }),
         .ABCD  ({ABCD}),

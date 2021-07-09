@@ -21,6 +21,7 @@ module BCDto7Seg_TB;
         .LED_type_ctl(LED_type_ctl)
     );
 
+    // Test
     initial begin
         // Common Cathode
         LED_type_ctl = 1'b0;
