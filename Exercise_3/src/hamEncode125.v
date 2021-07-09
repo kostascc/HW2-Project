@@ -10,7 +10,8 @@
     input  wire[11:0]  IN
 );
 
-    reg[4:0] PAR;
+    // Output consisting of 
+    // input and Parity bits
     assign OUT = {
         IN[11], //17
         PAR[4],   //16
@@ -31,6 +32,8 @@
         PAR[0]    //1
     };
 
+    // Parity Bits
+    reg[4:0] PAR;
 
     assign PAR[0]  = OUT[3]  ^ OUT[5]  ^ 
                      OUT[7]  ^ OUT[9]  ^ OUT[11] ^ 
@@ -46,6 +49,6 @@
 
     assign PAR[3]  = OUT[9]  ^ OUT[10] ^ OUT[11] ^ OUT[12] ;
 
-    assign PAR[4] = OUT[17] ;
+    assign PAR[4]  = OUT[17] ;
 
 endmodule
