@@ -1336,7 +1336,7 @@ endmodule
 
 ## ΙΙ.5. Απεικόνιση απαριθμητή τεσσάρων ψηφίων σε 7-Segment LEDs
 
-​	Τέλος, καλούμαστε να συνδυάσουμε έναν απαριθμητή τεσσάρων ψηφίων με αντίστοιχο πλήθος 7-Seg. ψηφίων LED κοινής ανόδου ή καθόδου. Όπως προαναφέρθηκε, έχει γίνει η επιλογή ότι το ολικό κύκλωμα πρέπει να περιέχει μόνο έναν ελεγκτή ενεργοποίησης (*ΕΝ*) του απαριθμητή για εξοικονόμηση χώρου. Επομένως γίνεται χρήση ενός μόνο 
+​	Τέλος, καλούμαστε να συνδυάσουμε έναν απαριθμητή τεσσάρων ψηφίων με αντίστοιχο πλήθος 7-Seg. ψηφίων LED κοινής ανόδου ή καθόδου. Όπως προαναφέρθηκε, έχει γίνει η επιλογή ότι το ολικό κύκλωμα πρέπει να περιέχει μόνο έναν ελεγκτή ενεργοποίησης (*ΕΝ*) του απαριθμητή για εξοικονόμηση χώρου. Επομένως γίνεται χρήση ενός μόνο κυκλώματος *Clock Gating*. 
 
 <table style="width:100%;">
 <tr>
@@ -1347,9 +1347,88 @@ endmodule
 </figure>
 </td>
 </table>
+​	Για την κατασκευή του κυκλώματος αυτού απαιτείται αρχικά η υλοποίηση ενός D Flip Flop. To Flip Flop αυτό κατασκευάζεται από ένα D-Latch και ένα SR-Latch όπως φαίνεται στο παρακάτω σχήμα.
 
+<table style="width:100%;">
+<tr>
+<td style="border: none;">
+<figure style="text-align:center;">
+  <img src="../Exercise_2/writing/master_slave_d_ff.gif" style="width:55%; border: 1px solid rgb(0 0 0 / 15%)">
+  <figcaption>Εικόνα II.0: Κύκλωμα D-FF με συνδεσμολογία Master-Slave.</figcaption>
+</figure>
+</td>
+</table>
 
+```verilog
+// d_ff.v
+module d_ff (
+    output wire Q, Qn,
+    input wire D, CLK, RST
+);
+wire n1, n2, n3, n4, n5, n6;
 
+not u1(_CLK, CLK);
+not u2(_RST, RST);
+not u3(_D, D);
+
+// Master
+nand u4(n1, D, _RST, _CLK);
+nand u5(n2, _CLK, _D);
+nand u6(n3, n1, n4);
+nand u7(n4, n3, _RST, n2);
+
+// Slave
+nand u8(n5, n3, _RST, CLK);
+nand u9(n6, CLK, n4);
+nand u10(Q, n5, Qn);
+nand u11(Qn, Q, _RST, n6);
+
+endmodule
+```
+
+​	Ο έλεγχος του D Flip Flop θα γίνει με τρόπο ανάλογο των προηγούμενων Flip Flop από το παρακάτω Testbench. Σκοπός του ελέγχου δηλαδή είναι και πάλι η διαπίστευτη της ορθής λειτουργίας σε σύγχρονες αλλα και ασύγχρονες εισόδους.
+
+```verilog
+// d_ff_TB.v
+module d_ff_TB;
+
+wire Q, Qn;
+reg D, CLK, RST, expectedOut;
+
+d_ff dut(Q, Qn, D, CLK, RST);
+
+// Initialize
+initial begin
+    CLK = 1'b0;
+    expectedOut = 0'b0;
+    D = 1'b0;
+end
+
+// Clock
+always begin
+    #5; CLK= ~CLK;
+end
+
+// Test
+initial begin
+    	RST = 1'b1;
+    #2;	RST = 1'b0;
+    #2;	D = 1'b0;
+    #10;D = 1'b1;
+    	expectedOut = D;
+    #10;D = 1'b0;
+    	expectedOut = D;
+    #20;D = 1'b1;
+    	expectedOut = D;
+    #20;RST = 1'b1;
+    	expectedOut = 1'b0;
+    #10;RST = 1'b0;
+    	expectedOut = 1'b1;
+end
+endmodule
+```
+
+​	Μετά απο εκτέλεση του συτκεκριμένου Testbench, παρατηρείται ότι η λειτουργία του είναι η αναμενόμενη. Σημειώνεται ότι το σήμα ελέγχου *expectedOut* τίθεται λίγο νωρίτερα (δηλαδή ασύγχρονα) στην αναμενόμενη τιμή εξόδου απ' ότι θα έπρεπε. Παρ' όλα αυτά το D Flip Flop μεταβαίνει ορθά στην επόμενη κατάσταση κατά την ανερχόμενη ακμή του ρολογιού (σύγχρονα), όπως είναι επιθυμητό.
 
 
 <table style="width:100%;">
@@ -1361,7 +1440,120 @@ endmodule
 </figure>
 </td>
 </table>
+​	Συνεχίζοντας με το βασικό θέμα της ενότητας, δηλαδή το συνδυασμό τεσσάρων απαριθμητών με τα αντίστοιχα 7-Seg. ψηφία LED, έχουμε πλέον τη δυνατότα να κατασκευάσουμε το σήμα εισόδου χρησιμοποιόντας ένα *Gated Clock* που παράγεται από το βασικό *CLOCK* εισόδου, με ένα σήμα ενεργοποίησης *EN*. Η κατασκευή αυτή θα γίνει χρησιμοποιόντας το κύκλωμα μετρητή τεσσάρων ψηφίων (όπως περιγράφηκε στην προηγούμενη ενότητα), το κύκλωμα *Clock Gating* για την ενεργοποίηση της πρώτης βαθμίδας (LSB ψηφίο) του μετρητή, καθώς και τέσσερις μετατροπείς BCD προς 7-Seg. Επισημαίνεται ότι για λόγους απλοποίησης θεωρείται ότι όλα τα ψηφία LED είναι ίδιου τύπου (Common Cathode/Anode) και επομένως το σήμα *LED_type_ctl* είναι κοινό για όλους του μετατροπείς. Εύκολα θα μπορούσε όμως να υλοποιηθεί η παραλλαγή του κυκλώματος, όπου το κάθε ψηφίο LED είναι διαφορετικού τύπου.
 
+```verilog
+// d4BCDcounter7Seg.v
+module d4BCDcounter7Seg(
+    output wire [6:0] LED1, LED2, LED3, LED4,
+    input wire EN, RST, CLK, LED_type_ctl
+);
+    wire[3:0] ABCD[3:0];
+
+    //Clock Gating
+    wire GCLK, nDQ;
+    d_ff u_dff(
+        .RST(RST),
+        .CLK(CLK),
+        .D(EN),
+        .Q(nDQ),
+        .Qn(Qn)
+    );
+    and u_a1( GCLK, nDQ, CLK );
+
+    // Counters
+    d4BCDcounter u_cnt (
+        .ABCD1({ABCD[0]}),
+        .ABCD2({ABCD[1]}),
+        .ABCD3({ABCD[2]}),
+        .ABCD4({ABCD[3]}),
+        .EN(GCLK),
+        .RST(RST)
+    );
+
+    // 7-Seg converters
+    BCDto7Seg u_led[3:0] (
+        .LED   ({ LED1[6:0],LED2[6:0],LED3[6:0],LED4[6:0] }),
+        .ABCD  ({ABCD}),
+        .LED_type_ctl(LED_type_ctl)
+    );
+endmodule
+```
+
+​	Στο κύκλωμα αυτό απαιτείται έλεγχος, τόσο της λειτουργίας των μετρητών κατά την ενεργοποίηση του σήματος *EN*, όσο και της μετατροπής των ψηφίων σε μορφή 7-Seg. Για τη διευκόλυνση των ελέγχων έχει υλοποιηθεί μια συνθήκη *case*, όπου γίνεται μετατροπή του κάθε 7-Seg ψηφίου σε δεκαδικό αριθμό. 
+
+```verilog
+// d4BCDcounter7Seg_TB.v
+`timescale 100ns/100ns
+module d4BCDcounter7Seg_TB;
+
+    wire[6:0]     LED1, LED2, LED3, LED4;
+    reg       EN, RST, CLK, LED_type_ctl;
+
+    d4BCDcounter7Seg dut(
+        .LED1(LED1),
+        .LED2(LED2),
+        .LED3(LED3),
+        .LED4(LED4),
+        .EN(EN),
+        .RST(RST),
+        .CLK(CLK),
+        .LED_type_ctl(LED_type_ctl)
+    );
+
+    wire[6:0] LEDout[3:0];  // LED output vector
+    integer      out[3:0];  // Decimal output vector
+    integer i;
+    reg[6:0] normalizedLEDOut;
+
+    // connect counter output to 7-Seg encoder.
+    assign {
+        LEDout[3][6:0],LEDout[2][6:0],LEDout[1][6:0],LEDout[0][6:0]
+        } = {
+        LED4[6:0],LED3[6:0],LED2[6:0],LED1[6:0]
+    };
+
+    // Initialize
+    initial begin
+        LED_type_ctl = 1'b0;
+        EN = 1'b0;
+        RST = 1'b1;
+        CLK = 1'b0;
+    end
+
+    // Set EN, RST
+    initial begin
+        #4;  RST = 1'b0;
+        #20; EN = 1'b1;
+    end
+
+    // Convert 7-Seg. to Decimal
+    always @(LED1 or LED2 or LED3 or LED4) begin
+        for(i=0; i<4; i=i+1) begin
+            normalizedLEDOut = (LED_type_ctl==1'b1)? ~({LEDout[i][6:0]}) : ({LEDout[i][6:0]});
+            case( normalizedLEDOut )
+                7'b_1111110:    out[i] = 0;
+                7'b_0110000:    out[i] = 1;
+                7'b_1101101:    out[i] = 2;
+                7'b_1111001:    out[i] = 3;
+                7'b_0110011:    out[i] = 4;
+                7'b_1011011:    out[i] = 5;
+                7'b_1011111:    out[i] = 6;
+                7'b_1110000:    out[i] = 7;
+                7'b_1111111:    out[i] = 8;
+                7'b_1111011:    out[i] = 9;
+            endcase
+        end
+    end
+
+    // Clock
+    always begin
+        #5 CLK = ~CLK;
+    end
+endmodule
+```
+
+​	Προσομοιώνοντας
 
 
 
