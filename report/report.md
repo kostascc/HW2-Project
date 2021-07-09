@@ -19,6 +19,12 @@
 
 <div style="page-break-after: always; break-after: page;"></div>
 
+
+
+
+
+
+
 <h5>Περιεχόμενα</h5>
 
 [TOC]
@@ -1864,9 +1870,7 @@ endmodule
 
 ##ΙΙΙ.4. Απο/κωδικοποίηση σε κανάλι θορύβου
 
-​	Ως τελευταίο βήμα καλούμαστε να ελέγξουμε την υπόθεση ότι ο αποκωδικοποιητής μπορεί να διορθώσει σε σφάλμα σε εώς και ένα bit της κωδικοποιημένης λέξης. Για τον έλεγχο της υπόθεσης αυτή κατασκευάζουμε το ακόλουθο σύστημα.
-
-
+​	Ως τελευταίο βήμα καλούμαστε να ελέγξουμε την υπόθεση ότι ο αποκωδικοποιητής μπορεί να διορθώσει σε σφάλμα σε εώς και ένα bit της κωδικοποιημένης λέξης. Για τον έλεγχο της υπόθεσης αυτής κατασκευάζουμε το ακόλουθο σύστημα.
 
 <table style="width:100%;">
 <tr>
@@ -1878,7 +1882,71 @@ endmodule
 </td>
 </table>
 
+​	Ο `test_HD_codec` περιέχει δυο εισόδους: μια για τα εισερχόμενα δεδομένα μεγέθους 12bit, και μια (32 bit) για τη θέση σφάλματος στην οποία το σύστημα καλείται να προκαλέσει σφάλμα. Έξοδος του συστήματος είναι η αποκωδικοποιημένη λέξη, δηλαδή η λέξη που προκύπτει μετά από διόρθωση του σφάλματος. Το σύστημα κατασκευάζεται έτσι ώστε να προκαλεί σφάλμα σε ένα από τα bit που ανήκουν στο σύνολο [0, 11]. Για αριθμούς εκτός του συνόλου αυτού, δεν προκαλείται κανένα σφάλμα στη κωδικοποιημένη λέξη.
 
+```verilog
+// test_HD_codec.v
+module test_HD_codec(
+    output wire[11:0] OUT,
+    input wire[11:0] IN, 
+    input wire[31:0] error_bit
+);
+    reg[16:0]  noiOUT;
+    wire[16:0] encOUT;
+
+    hamEncode125 u_enc ( .IN(IN), .OUT(encOUT) );  // Encoder
+    hamDecode125 u_dec ( .IN(noiOUT), .OUT(OUT) ); // Decoder
+
+    // Impose a bit error
+    always @(IN) begin
+        if(error_bit > 11) begin
+            noiOUT = encOUT;
+        end else begin
+            noiOUT = encOUT;
+            noiOUT[error_bit] = ~noiOUT[error_bit];
+        end
+    end
+endmodule
+```
+
+​	Για τον έλεγχο του παραπάνω συστήματος κατασκευάζεται το ακόλουθο Τestbench, όπου παράγονται τυχαίες λέξεις μεγέθους 12 bit, και ένα τυχαίο σήμα *error_bit* στο διάστημα [0, 16]. Επίσης σε κάθε κατερχόμενη ακμή του ρολογιού γίνεται έλεγχος της ορθότητας στην έξοδο του συστήματος.
+
+```verilog
+// test_HD_codec_TB.v
+`timescale 10ns/1ns
+module test_HD_codec_TB;
+    reg[11:0] IN;
+    wire[11:0] OUT;
+    reg clk;
+    integer error_bit;
+    test_HD_codec dut( .IN(IN), .OUT(OUT), .error_bit(error_bit) );
+
+    // Initialize
+    initial begin
+        clk = 0;
+    end
+
+    // Set input and error bit
+    always @(posedge clk) begin
+        IN = $urandom%(2**12-1);
+        error_bit = $urandom%16;
+    end
+
+    // Check Output
+    always @(negedge clk) begin
+        if(IN != OUT) begin
+            $display("Error");
+        end
+    end
+
+    // Clock
+    always begin
+        #5 clk = ~clk;
+    end
+endmodule
+```
+
+​	Όπως φαίνεται παρακάτω, μετά απο εισαγωγή σφάλματος στις θέσεις 4, 7, 0, 9 σε διαδοχικές λέξεις, ο αποκωδικοποιητής ήταν σε θέση να εντοπίσει το σφάλμα (φαίνεται από το γεγονός ότι τα Parity bits δεν είναι μηδενικά, αλλά δείχνουν όντως στη θέση του σφάλματος (με μια απόκλιση πάντα κατά ένα, λόγω του ότι το LSB της κωδικοποιημένης λέξης λέγεται ότι βρίσκεται στη θέση 1).
 
 <table style="width:100%;">
 <tr>
@@ -1889,9 +1957,7 @@ endmodule
 </figure>
 </td>
 </table>
-
-
-
+Περισσότερες δοκιμαστικές λέξεις φαίνονται στην παρακάτω εικόνα, όπου επιλέχθηκε η μετατροπή των δυαδικών αριθμών σε δεκαδικούς για ευκολότερη ανάγνωση.
 
 
 <table style="width:100%;">
@@ -1903,12 +1969,6 @@ endmodule
 </figure>
 </td>
 </table>
-
-
-
-
-
-
 
 <div style="page-break-after: always; break-after: page;"></div>
 
